@@ -1,0 +1,44 @@
+{
+  "name": "@canterbury-air-patrol/sar-search-runner",
+  "version": "0.0.1",
+  "description": "SAR Search runner tool",
+  "main": "sar-search-runner.js",
+  "scripts": {
+    "build": "esbuild example.js --bundle --loader:.js=jsx --outdir=out",
+    "check": "eslint *.js",
+    "start": "http-server -p 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canterbury-air-patrol/sar-search-runner.git"
+  },
+  "keywords": [
+    "sar",
+    "search",
+    "runner",
+    "timer"
+  ],
+  "author": "Scott Parlane",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/canterbury-air-patrol/sar-search-runner/issues"
+  },
+  "homepage": "https://github.com/canterbury-air-patrol/sar-search-runner#readme",
+  "devDependencies": {
+    "esbuild": "~0.18.17",
+    "eslint": "~8.47.0",
+    "eslint-plugin-react": "~7.33.1",
+    "http-server": "^14.1.1",
+    "react-dom": "~18.2.0",
+    "standard": "~17.1.0"
+  },
+  "dependencies": {
+    "@canterbury-air-patrol/sar-search-patterns": "~0.0.4",
+    "@canterbury-air-patrol/speed-time-distance": "~0.0.3",
+    "bootstrap": "~5.3.1",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "~2.8.0"
+  }
+}
