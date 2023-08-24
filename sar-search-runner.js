@@ -203,7 +203,7 @@ class SearchRunnerConfiguration extends React.Component {
     super(props)
     this.onChangeSearch = this.onChangeSearch.bind(this)
     this.state = {
-      search: new SectorSearch(200, 1, 0)
+      search: new SectorSearch(200, 1, 1, 0)
     }
   }
 
@@ -217,7 +217,7 @@ class SearchRunnerConfiguration extends React.Component {
     return (
       <>
         <SearchConfiguration updateSearch={this.onChangeSearch} />
-        <SearchRunner key={`${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`} search={this.state.search} />
+        <SearchRunner key={`${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.multiplier}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`} search={this.state.search} />
       </>
     )
   }
