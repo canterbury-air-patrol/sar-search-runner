@@ -31505,6 +31505,7 @@
       super(props);
       this.handleChangeSearch = this.handleChangeSearch.bind(this);
       this.handleChangeSweepWidth = this.handleChangeSweepWidth.bind(this);
+      this.handleChangeMultiplier = this.handleChangeMultiplier.bind(this);
       this.handleChangeLegLength = this.handleChangeLegLength.bind(this);
       this.handleChangeIterations = this.handleChangeIterations.bind(this);
       this.handleChangeDirection = this.handleChangeDirection.bind(this);
@@ -31556,6 +31557,19 @@
         };
       });
     }
+    handleChangeMultiplier(event) {
+      const target = event.target;
+      const value = Number(target.value);
+      this.setState(function(oldState) {
+        oldState.multiplier = value;
+        if (this.props.updateSearch !== void 0) {
+          this.props.updateSearch(constructSearch(oldState));
+        }
+        return {
+          multiplier: value
+        };
+      });
+    }
     handleChangeIterations(event) {
       const target = event.target;
       const value = Number(target.value);
@@ -31587,8 +31601,12 @@
       const inputs = [];
       if (this.state.searchType === "sector" || this.state.searchType === "expandingbox") {
         labels.push(/* @__PURE__ */ import_react10.default.createElement("td", { key: "iterations" }, "Iterations"));
-        labels.push(/* @__PURE__ */ import_react10.default.createElement("td", { key: "direction" }, "Initial Direction"));
         inputs.push(/* @__PURE__ */ import_react10.default.createElement("td", { key: "iterations" }, /* @__PURE__ */ import_react10.default.createElement(Form_default.Control, { type: "number", onChange: this.handleChangeIterations, value: this.state.iterations })));
+        if (this.state.searchType === "sector") {
+          labels.push(/* @__PURE__ */ import_react10.default.createElement("td", { key: "multiplier" }, "Multiplier"));
+          inputs.push(/* @__PURE__ */ import_react10.default.createElement("td", { key: "multiplier" }, /* @__PURE__ */ import_react10.default.createElement(Form_default.Control, { type: "number", onChange: this.handleChangeMultiplier, value: this.state.multiplier })));
+        }
+        labels.push(/* @__PURE__ */ import_react10.default.createElement("td", { key: "direction" }, "Initial Direction"));
         inputs.push(/* @__PURE__ */ import_react10.default.createElement("td", { key: "direction" }, /* @__PURE__ */ import_react10.default.createElement(Form_default.Control, { type: "number", onChange: this.handleChangeDirection, value: this.state.initialDirection })));
       } else if (this.state.searchType === "creepingline") {
         labels.push(/* @__PURE__ */ import_react10.default.createElement("td", { key: "legs" }, "Leg Length"));
@@ -32136,7 +32154,7 @@
       super(props);
       this.onChangeSearch = this.onChangeSearch.bind(this);
       this.state = {
-        search: new SectorSearch(200, 1, 0)
+        search: new SectorSearch(200, 1, 1, 0)
       };
     }
     onChangeSearch(search) {
@@ -32145,7 +32163,7 @@
       });
     }
     render() {
-      return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(SearchConfiguration, { updateSearch: this.onChangeSearch }), /* @__PURE__ */ import_react12.default.createElement(SearchRunner, { key: `${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`, search: this.state.search }));
+      return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(SearchConfiguration, { updateSearch: this.onChangeSearch }), /* @__PURE__ */ import_react12.default.createElement(SearchRunner, { key: `${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.multiplier}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`, search: this.state.search }));
     }
   };
 
