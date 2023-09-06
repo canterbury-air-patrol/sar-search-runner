@@ -30461,6 +30461,14 @@
     get complete() {
       return this.currentLeg > this.searchLegs.length;
     }
+    get length() {
+      let length = 0;
+      for (const legIdx in this.searchLegs) {
+        const tmpLeg = this.searchLegs[legIdx];
+        length += tmpLeg.distance;
+      }
+      return length;
+    }
     getLegs() {
       return this.searchLegs;
     }
@@ -32129,6 +32137,7 @@
         }
       }
       const instruction = /* @__PURE__ */ import_react12.default.createElement("h1", null, instructionText);
+      const totalDistance = /* @__PURE__ */ import_react12.default.createElement("h1", null, "Total Length: ", /* @__PURE__ */ import_react12.default.createElement(DistanceUI, { distance: new Distance(this.state.search.length, "m"), locked: true }));
       return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(
         SpeedTimeDistanceUI,
         {
@@ -32142,7 +32151,7 @@
           updateTime: this.onChangeTime,
           updateSpeed: this.onChangeSpeed
         }
-      ), /* @__PURE__ */ import_react12.default.createElement(ButtonGroup_default, null, buttons), timer, instruction, /* @__PURE__ */ import_react12.default.createElement(SearchDisplay, { key: "display" + this.state.searchLeg, search: this.state.search }));
+      ), /* @__PURE__ */ import_react12.default.createElement(ButtonGroup_default, null, buttons), timer, instruction, /* @__PURE__ */ import_react12.default.createElement(SearchDisplay, { key: "display" + this.state.searchLeg, search: this.state.search }), totalDistance);
     }
   };
   SearchRunner.propTypes = {
