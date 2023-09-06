@@ -34,7 +34,7 @@
     "standard": "~17.1.0"
   },
   "dependencies": {
-    "@canterbury-air-patrol/sar-search-patterns": "~0.0.5",
+    "@canterbury-air-patrol/sar-search-patterns": "~0.0.6",
     "@canterbury-air-patrol/speed-time-distance": "~0.0.3",
     "bootstrap": "~5.3.1",
     "prop-types": "^15.8.1",
