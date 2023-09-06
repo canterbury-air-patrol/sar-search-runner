@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { CreepingLineAheadSearch, SectorSearch } from '@canterbury-air-patrol/sar-search-patterns'
 import { SearchDisplay, SearchConfiguration } from '@canterbury-air-patrol/sar-search-patterns/react'
 import { Distance, Speed, Time } from '@canterbury-air-patrol/speed-time-distance'
-import { SpeedTimeDistanceUI } from '@canterbury-air-patrol/speed-time-distance/react'
+import { DistanceUI, SpeedTimeDistanceUI } from '@canterbury-air-patrol/speed-time-distance/react'
 import { Button, ButtonGroup } from 'react-bootstrap'
 
 const SearchTimer = ({ runTime, run, complete }) => {
@@ -171,6 +171,7 @@ class SearchRunner extends React.Component {
       }
     }
     const instruction = (<h1>{instructionText}</h1>)
+    const totalDistance = (<h1>Total Length: <DistanceUI distance={new Distance(this.state.search.length, 'm')} locked /></h1>)
 
     return (
       <>
@@ -189,6 +190,7 @@ class SearchRunner extends React.Component {
         {timer}
         {instruction}
         <SearchDisplay key={'display' + this.state.searchLeg} search={this.state.search} />
+        {totalDistance}
       </>
     )
   }

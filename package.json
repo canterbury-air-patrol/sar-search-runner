@@ -1,6 +1,6 @@
 {
   "name": "@canterbury-air-patrol/sar-search-runner",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "SAR Search runner tool",
   "main": "sar-search-runner.js",
   "scripts": {
