@@ -630,7 +630,7 @@
             }
             return ReactElement(element.type, key, ref, self, source, owner, props);
           }
-          function isValidElement2(object) {
+          function isValidElement3(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
           }
           var SEPARATOR = ".";
@@ -695,7 +695,7 @@
                   return c;
                 });
               } else if (mappedChild != null) {
-                if (isValidElement2(mappedChild)) {
+                if (isValidElement3(mappedChild)) {
                   {
                     if (mappedChild.key && (!_child || _child.key !== mappedChild.key)) {
                       checkKeyStringCoercion(mappedChild.key);
@@ -783,12 +783,12 @@
             }) || [];
           }
           function onlyChild(children) {
-            if (!isValidElement2(children)) {
+            if (!isValidElement3(children)) {
               throw new Error("React.Children.only expected to receive a single React element child.");
             }
             return children;
           }
-          function createContext3(defaultValue) {
+          function createContext6(defaultValue) {
             var context = {
               $$typeof: REACT_CONTEXT_TYPE,
               // As a workaround to support multiple concurrent renderers, we categorize
@@ -816,11 +816,11 @@
             var hasWarnedAboutUsingConsumerProvider = false;
             var hasWarnedAboutDisplayNameOnConsumer = false;
             {
-              var Consumer2 = {
+              var Consumer4 = {
                 $$typeof: REACT_CONTEXT_TYPE,
                 _context: context
               };
-              Object.defineProperties(Consumer2, {
+              Object.defineProperties(Consumer4, {
                 Provider: {
                   get: function() {
                     if (!hasWarnedAboutUsingConsumerProvider) {
@@ -878,7 +878,7 @@
                   }
                 }
               });
-              context.Consumer = Consumer2;
+              context.Consumer = Consumer4;
             }
             {
               context._currentRenderer = null;
@@ -943,7 +943,7 @@
             };
             {
               var defaultProps;
-              var propTypes3;
+              var propTypes5;
               Object.defineProperties(lazyType, {
                 defaultProps: {
                   configurable: true,
@@ -961,11 +961,11 @@
                 propTypes: {
                   configurable: true,
                   get: function() {
-                    return propTypes3;
+                    return propTypes5;
                   },
                   set: function(newPropTypes) {
                     error("React.lazy(...): It is not supported to assign `propTypes` to a lazy component import. Either specify them where the component is defined, or create a wrapping component around it.");
-                    propTypes3 = newPropTypes;
+                    propTypes5 = newPropTypes;
                     Object.defineProperty(lazyType, "propTypes", {
                       enumerable: true
                     });
@@ -975,7 +975,7 @@
             }
             return lazyType;
           }
-          function forwardRef21(render) {
+          function forwardRef39(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1074,7 +1074,7 @@
             }
             return dispatcher;
           }
-          function useContext9(Context) {
+          function useContext18(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1116,7 +1116,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo4(create, deps) {
+          function useMemo8(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1514,11 +1514,11 @@
             if (isArray(node)) {
               for (var i = 0; i < node.length; i++) {
                 var child = node[i];
-                if (isValidElement2(child)) {
+                if (isValidElement3(child)) {
                   validateExplicitKey(child, parentType);
                 }
               }
-            } else if (isValidElement2(node)) {
+            } else if (isValidElement3(node)) {
               if (node._store) {
                 node._store.validated = true;
               }
@@ -1529,7 +1529,7 @@
                   var iterator = iteratorFn.call(node);
                   var step;
                   while (!(step = iterator.next()).done) {
-                    if (isValidElement2(step.value)) {
+                    if (isValidElement3(step.value)) {
                       validateExplicitKey(step.value, parentType);
                     }
                   }
@@ -1543,19 +1543,19 @@
               if (type === null || type === void 0 || typeof type === "string") {
                 return;
               }
-              var propTypes3;
+              var propTypes5;
               if (typeof type === "function") {
-                propTypes3 = type.propTypes;
+                propTypes5 = type.propTypes;
               } else if (typeof type === "object" && (type.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
               // Inner props are checked in the reconciler.
               type.$$typeof === REACT_MEMO_TYPE)) {
-                propTypes3 = type.propTypes;
+                propTypes5 = type.propTypes;
               } else {
                 return;
               }
-              if (propTypes3) {
+              if (propTypes5) {
                 var name = getComponentNameFromType(type);
-                checkPropTypes(propTypes3, element.props, "prop", name, element);
+                checkPropTypes(propTypes5, element.props, "prop", name, element);
               } else if (type.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
                 propTypesMisspellWarningShown = true;
                 var _name = getComponentNameFromType(type);
@@ -1852,14 +1852,14 @@
           var createElement$1 = createElementWithValidation;
           var cloneElement$1 = cloneElementWithValidation;
           var createFactory = createFactoryWithValidation;
-          var Children2 = {
+          var Children3 = {
             map: mapChildren,
             forEach: forEachChildren,
             count: countChildren,
             toArray,
             only: onlyChild
           };
-          exports.Children = Children2;
+          exports.Children = Children3;
           exports.Component = Component;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
@@ -1868,18 +1868,18 @@
           exports.Suspense = REACT_SUSPENSE_TYPE;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
           exports.cloneElement = cloneElement$1;
-          exports.createContext = createContext3;
+          exports.createContext = createContext6;
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef21;
-          exports.isValidElement = isValidElement2;
+          exports.forwardRef = forwardRef39;
+          exports.isValidElement = isValidElement3;
           exports.lazy = lazy;
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback;
-          exports.useContext = useContext9;
+          exports.useContext = useContext18;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect2;
@@ -1887,7 +1887,7 @@
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect;
-          exports.useMemo = useMemo4;
+          exports.useMemo = useMemo8;
           exports.useReducer = useReducer;
           exports.useRef = useRef;
           exports.useState = useState2;
@@ -2386,9 +2386,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React27 = require_react();
+          var React47 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React27.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React47.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3993,7 +3993,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React27.Children.forEach(props.children, function(child) {
+                  React47.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12440,7 +12440,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React27.Component().refs;
+          var emptyRefsObject = new React47.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23856,7 +23856,7 @@
       function emptyFunctionThatReturnsNull() {
         return null;
       }
-      module.exports = function(isValidElement2, throwOnDirectAccess) {
+      module.exports = function(isValidElement3, throwOnDirectAccess) {
         var ITERATOR_SYMBOL = typeof Symbol === "function" && Symbol.iterator;
         var FAUX_ITERATOR_SYMBOL = "@@iterator";
         function getIteratorFn(maybeIterable) {
@@ -23984,7 +23984,7 @@
         function createElementTypeChecker() {
           function validate(props, propName, componentName, location, propFullName) {
             var propValue = props[propName];
-            if (!isValidElement2(propValue)) {
+            if (!isValidElement3(propValue)) {
               var propType = getPropType(propValue);
               return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement."));
             }
@@ -24172,7 +24172,7 @@
               if (Array.isArray(propValue)) {
                 return propValue.every(isNode);
               }
-              if (propValue === null || isValidElement2(propValue)) {
+              if (propValue === null || isValidElement3(propValue)) {
                 return true;
               }
               var iteratorFn = getIteratorFn(propValue);
@@ -24295,7 +24295,7 @@
         "use strict";
         var hasOwn = {}.hasOwnProperty;
         var nativeCodeString = "[native code]";
-        function classNames17() {
+        function classNames31() {
           var classes = [];
           for (var i = 0; i < arguments.length; i++) {
             var arg = arguments[i];
@@ -24306,7 +24306,7 @@
               classes.push(arg);
             } else if (Array.isArray(arg)) {
               if (arg.length) {
-                var inner = classNames17.apply(null, arg);
+                var inner = classNames31.apply(null, arg);
                 if (inner) {
                   classes.push(inner);
                 }
@@ -24326,14 +24326,14 @@
           return classes.join(" ");
         }
         if (typeof module !== "undefined" && module.exports) {
-          classNames17.default = classNames17;
-          module.exports = classNames17;
+          classNames31.default = classNames31;
+          module.exports = classNames31;
         } else if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
           define("classnames", [], function() {
-            return classNames17;
+            return classNames31;
           });
         } else {
-          window.classNames = classNames17;
+          window.classNames = classNames31;
         }
       })();
     }
@@ -24346,7 +24346,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React27 = require_react();
+          var React47 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24372,7 +24372,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React27.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React47.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -25000,7 +25000,7 @@
           {
             propTypesMisspellWarningShown = false;
           }
-          function isValidElement2(object) {
+          function isValidElement3(object) {
             {
               return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
             }
@@ -25067,11 +25067,11 @@
               if (isArray(node)) {
                 for (var i = 0; i < node.length; i++) {
                   var child = node[i];
-                  if (isValidElement2(child)) {
+                  if (isValidElement3(child)) {
                     validateExplicitKey(child, parentType);
                   }
                 }
-              } else if (isValidElement2(node)) {
+              } else if (isValidElement3(node)) {
                 if (node._store) {
                   node._store.validated = true;
                 }
@@ -25082,7 +25082,7 @@
                     var iterator = iteratorFn.call(node);
                     var step;
                     while (!(step = iterator.next()).done) {
-                      if (isValidElement2(step.value)) {
+                      if (isValidElement3(step.value)) {
                         validateExplicitKey(step.value, parentType);
                       }
                     }
@@ -25097,19 +25097,19 @@
               if (type === null || type === void 0 || typeof type === "string") {
                 return;
               }
-              var propTypes3;
+              var propTypes5;
               if (typeof type === "function") {
-                propTypes3 = type.propTypes;
+                propTypes5 = type.propTypes;
               } else if (typeof type === "object" && (type.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
               // Inner props are checked in the reconciler.
               type.$$typeof === REACT_MEMO_TYPE)) {
-                propTypes3 = type.propTypes;
+                propTypes5 = type.propTypes;
               } else {
                 return;
               }
-              if (propTypes3) {
+              if (propTypes5) {
                 var name = getComponentNameFromType(type);
-                checkPropTypes(propTypes3, element.props, "prop", name, element);
+                checkPropTypes(propTypes5, element.props, "prop", name, element);
               } else if (type.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
                 propTypesMisspellWarningShown = true;
                 var _name = getComponentNameFromType(type);
@@ -25234,7 +25234,7 @@
     "node_modules/warning/warning.js"(exports, module) {
       "use strict";
       var __DEV__ = true;
-      var warning3 = function() {
+      var warning5 = function() {
       };
       if (__DEV__) {
         printWarning = function printWarning2(format, args) {
@@ -25255,7 +25255,7 @@
           } catch (x) {
           }
         };
-        warning3 = function(condition, format, args) {
+        warning5 = function(condition, format, args) {
           var len = arguments.length;
           args = new Array(len > 2 ? len - 2 : 0);
           for (var key = 2; key < len; key++) {
@@ -25272,7 +25272,7 @@
         };
       }
       var printWarning;
-      module.exports = warning3;
+      module.exports = warning5;
     }
   });
 
@@ -30433,12 +30433,12 @@
   defineJQueryPlugin(Toast);
 
   // example.js
-  var import_react15 = __toESM(require_react());
+  var import_react25 = __toESM(require_react());
   var ReactDOM = __toESM(require_client());
 
   // sar-search-runner.js
-  var import_react12 = __toESM(require_react());
-  var import_prop_types5 = __toESM(require_prop_types());
+  var import_react22 = __toESM(require_react());
+  var import_prop_types7 = __toESM(require_prop_types());
 
   // node_modules/@canterbury-air-patrol/sar-search-patterns/sar-search-patterns.js
   var SearchLeg = class {
@@ -30595,7 +30595,7 @@
   var import_react10 = __toESM(require_react());
   var import_prop_types3 = __toESM(require_prop_types());
 
-  // node_modules/react-bootstrap/esm/ThemeProvider.js
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/ThemeProvider.js
   var React = __toESM(require_react());
   var import_react = __toESM(require_react());
   var import_jsx_runtime = __toESM(require_jsx_runtime());
@@ -30730,7 +30730,7 @@
   });
   Button2.displayName = "Button";
 
-  // node_modules/react-bootstrap/esm/createWithBsPrefix.js
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/createWithBsPrefix.js
   var import_classnames = __toESM(require_classnames());
 
   // node_modules/dom-helpers/esm/camelize.js
@@ -30741,7 +30741,7 @@
     });
   }
 
-  // node_modules/react-bootstrap/esm/createWithBsPrefix.js
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/createWithBsPrefix.js
   var React3 = __toESM(require_react());
   var import_jsx_runtime3 = __toESM(require_jsx_runtime());
   var pascalCase = (str) => str[0].toUpperCase() + camelize(str).slice(1);
@@ -30771,78 +30771,16 @@
     return BsComponent;
   }
 
-  // node_modules/react-bootstrap/esm/Button.js
-  var import_classnames2 = __toESM(require_classnames());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/ElementChildren.js
   var React4 = __toESM(require_react());
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
-  var Button3 = /* @__PURE__ */ React4.forwardRef(({
-    as,
-    bsPrefix,
-    variant = "primary",
-    size,
-    active = false,
-    disabled = false,
-    className,
-    ...props
-  }, ref) => {
-    const prefix = useBootstrapPrefix(bsPrefix, "btn");
-    const [buttonProps, {
-      tagName
-    }] = useButtonProps({
-      tagName: as,
-      disabled,
-      ...props
-    });
-    const Component = tagName;
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Component, {
-      ...buttonProps,
-      ...props,
-      ref,
-      disabled,
-      className: (0, import_classnames2.default)(className, prefix, active && "active", variant && `${prefix}-${variant}`, size && `${prefix}-${size}`, props.href && disabled && "disabled")
-    });
-  });
-  Button3.displayName = "Button";
-  var Button_default = Button3;
-
-  // node_modules/react-bootstrap/esm/ButtonGroup.js
-  var import_classnames3 = __toESM(require_classnames());
-  var React5 = __toESM(require_react());
-  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
-  var ButtonGroup = /* @__PURE__ */ React5.forwardRef(({
-    bsPrefix,
-    size,
-    vertical = false,
-    className,
-    role = "group",
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as: Component = "div",
-    ...rest
-  }, ref) => {
-    const prefix = useBootstrapPrefix(bsPrefix, "btn-group");
-    let baseClass = prefix;
-    if (vertical)
-      baseClass = `${prefix}-vertical`;
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Component, {
-      ...rest,
-      ref,
-      role,
-      className: (0, import_classnames3.default)(className, baseClass, size && `${prefix}-${size}`)
-    });
-  });
-  ButtonGroup.displayName = "ButtonGroup";
-  var ButtonGroup_default = ButtonGroup;
-
-  // node_modules/react-bootstrap/esm/ElementChildren.js
-  var React6 = __toESM(require_react());
   function hasChildOfType(children, type) {
-    return React6.Children.toArray(children).some((child) => /* @__PURE__ */ React6.isValidElement(child) && child.type === type);
+    return React4.Children.toArray(children).some((child) => /* @__PURE__ */ React4.isValidElement(child) && child.type === type);
   }
 
-  // node_modules/react-bootstrap/esm/Col.js
-  var import_classnames4 = __toESM(require_classnames());
-  var React7 = __toESM(require_react());
-  var import_jsx_runtime6 = __toESM(require_jsx_runtime());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/Col.js
+  var import_classnames2 = __toESM(require_classnames());
+  var React5 = __toESM(require_react());
+  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
   function useCol({
     as,
     bsPrefix,
@@ -30879,14 +30817,14 @@
     });
     return [{
       ...props,
-      className: (0, import_classnames4.default)(className, ...spans, ...classes)
+      className: (0, import_classnames2.default)(className, ...spans, ...classes)
     }, {
       as,
       bsPrefix,
       spans
     }];
   }
-  var Col = /* @__PURE__ */ React7.forwardRef(
+  var Col = /* @__PURE__ */ React5.forwardRef(
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     (props, ref) => {
       const [{
@@ -30897,31 +30835,31 @@
         bsPrefix,
         spans
       }] = useCol(props);
-      return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Component, {
+      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Component, {
         ...colProps,
         ref,
-        className: (0, import_classnames4.default)(className, !spans.length && bsPrefix)
+        className: (0, import_classnames2.default)(className, !spans.length && bsPrefix)
       });
     }
   );
   Col.displayName = "Col";
   var Col_default = Col;
 
-  // node_modules/react-bootstrap/esm/Form.js
-  var import_classnames15 = __toESM(require_classnames());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/Form.js
+  var import_classnames13 = __toESM(require_classnames());
   var import_prop_types2 = __toESM(require_prop_types());
-  var React21 = __toESM(require_react());
+  var React19 = __toESM(require_react());
 
-  // node_modules/react-bootstrap/esm/FormCheck.js
-  var import_classnames8 = __toESM(require_classnames());
-  var React12 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormCheck.js
+  var import_classnames6 = __toESM(require_classnames());
+  var React10 = __toESM(require_react());
   var import_react4 = __toESM(require_react());
 
-  // node_modules/react-bootstrap/esm/Feedback.js
-  var import_classnames5 = __toESM(require_classnames());
-  var React8 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/Feedback.js
+  var import_classnames3 = __toESM(require_classnames());
+  var React6 = __toESM(require_react());
   var import_prop_types = __toESM(require_prop_types());
-  var import_jsx_runtime7 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
   var propTypes = {
     /**
      * Specify whether the feedback is for valid or invalid fields
@@ -30933,7 +30871,7 @@
     tooltip: import_prop_types.default.bool,
     as: import_prop_types.default.elementType
   };
-  var Feedback = /* @__PURE__ */ React8.forwardRef(
+  var Feedback = /* @__PURE__ */ React6.forwardRef(
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     ({
       as: Component = "div",
@@ -30941,29 +30879,29 @@
       type = "valid",
       tooltip = false,
       ...props
-    }, ref) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Component, {
+    }, ref) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Component, {
       ...props,
       ref,
-      className: (0, import_classnames5.default)(className, `${type}-${tooltip ? "tooltip" : "feedback"}`)
+      className: (0, import_classnames3.default)(className, `${type}-${tooltip ? "tooltip" : "feedback"}`)
     })
   );
   Feedback.displayName = "Feedback";
   Feedback.propTypes = propTypes;
   var Feedback_default = Feedback;
 
-  // node_modules/react-bootstrap/esm/FormCheckInput.js
-  var import_classnames6 = __toESM(require_classnames());
-  var React10 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormCheckInput.js
+  var import_classnames4 = __toESM(require_classnames());
+  var React8 = __toESM(require_react());
   var import_react2 = __toESM(require_react());
 
-  // node_modules/react-bootstrap/esm/FormContext.js
-  var React9 = __toESM(require_react());
-  var FormContext = /* @__PURE__ */ React9.createContext({});
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormContext.js
+  var React7 = __toESM(require_react());
+  var FormContext = /* @__PURE__ */ React7.createContext({});
   var FormContext_default = FormContext;
 
-  // node_modules/react-bootstrap/esm/FormCheckInput.js
-  var import_jsx_runtime8 = __toESM(require_jsx_runtime());
-  var FormCheckInput = /* @__PURE__ */ React10.forwardRef(({
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormCheckInput.js
+  var import_jsx_runtime6 = __toESM(require_jsx_runtime());
+  var FormCheckInput = /* @__PURE__ */ React8.forwardRef(({
     id,
     bsPrefix,
     className,
@@ -30978,23 +30916,23 @@
       controlId
     } = (0, import_react2.useContext)(FormContext_default);
     bsPrefix = useBootstrapPrefix(bsPrefix, "form-check-input");
-    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Component, {
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Component, {
       ...props,
       ref,
       type,
       id: id || controlId,
-      className: (0, import_classnames6.default)(className, bsPrefix, isValid && "is-valid", isInvalid && "is-invalid")
+      className: (0, import_classnames4.default)(className, bsPrefix, isValid && "is-valid", isInvalid && "is-invalid")
     });
   });
   FormCheckInput.displayName = "FormCheckInput";
   var FormCheckInput_default = FormCheckInput;
 
-  // node_modules/react-bootstrap/esm/FormCheckLabel.js
-  var import_classnames7 = __toESM(require_classnames());
-  var React11 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormCheckLabel.js
+  var import_classnames5 = __toESM(require_classnames());
+  var React9 = __toESM(require_react());
   var import_react3 = __toESM(require_react());
-  var import_jsx_runtime9 = __toESM(require_jsx_runtime());
-  var FormCheckLabel = /* @__PURE__ */ React11.forwardRef(({
+  var import_jsx_runtime7 = __toESM(require_jsx_runtime());
+  var FormCheckLabel = /* @__PURE__ */ React9.forwardRef(({
     bsPrefix,
     className,
     htmlFor,
@@ -31004,21 +30942,21 @@
       controlId
     } = (0, import_react3.useContext)(FormContext_default);
     bsPrefix = useBootstrapPrefix(bsPrefix, "form-check-label");
-    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("label", {
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("label", {
       ...props,
       ref,
       htmlFor: htmlFor || controlId,
-      className: (0, import_classnames7.default)(className, bsPrefix)
+      className: (0, import_classnames5.default)(className, bsPrefix)
     });
   });
   FormCheckLabel.displayName = "FormCheckLabel";
   var FormCheckLabel_default = FormCheckLabel;
 
-  // node_modules/react-bootstrap/esm/FormCheck.js
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormCheck.js
+  var import_jsx_runtime8 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime9 = __toESM(require_jsx_runtime());
   var import_jsx_runtime10 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime11 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime12 = __toESM(require_jsx_runtime());
-  var FormCheck = /* @__PURE__ */ React12.forwardRef(({
+  var FormCheck = /* @__PURE__ */ React10.forwardRef(({
     id,
     bsPrefix,
     bsSwitchPrefix,
@@ -31049,7 +30987,7 @@
       controlId: id || controlId
     }), [controlId, id]);
     const hasLabel = !children && label != null && label !== false || hasChildOfType(children, FormCheckLabel_default);
-    const input = /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(FormCheckInput_default, {
+    const input = /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(FormCheckInput_default, {
       ...props,
       type: type === "switch" ? "checkbox" : type,
       ref,
@@ -31058,16 +30996,16 @@
       disabled,
       as
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(FormContext_default.Provider, {
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(FormContext_default.Provider, {
       value: innerFormContext,
-      children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", {
+      children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", {
         style,
-        className: (0, import_classnames8.default)(className, hasLabel && bsPrefix, inline && `${bsPrefix}-inline`, reverse && `${bsPrefix}-reverse`, type === "switch" && bsSwitchPrefix),
-        children: children || /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(import_jsx_runtime11.Fragment, {
-          children: [input, hasLabel && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(FormCheckLabel_default, {
+        className: (0, import_classnames6.default)(className, hasLabel && bsPrefix, inline && `${bsPrefix}-inline`, reverse && `${bsPrefix}-reverse`, type === "switch" && bsSwitchPrefix),
+        children: children || /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(import_jsx_runtime9.Fragment, {
+          children: [input, hasLabel && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(FormCheckLabel_default, {
             title,
             children: label
-          }), feedback && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Feedback_default, {
+          }), feedback && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Feedback_default, {
             type: feedbackType,
             tooltip: feedbackTooltip,
             children: feedback
@@ -31082,13 +31020,13 @@
     Label: FormCheckLabel_default
   });
 
-  // node_modules/react-bootstrap/esm/FormControl.js
-  var import_classnames9 = __toESM(require_classnames());
-  var React13 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormControl.js
+  var import_classnames7 = __toESM(require_classnames());
+  var React11 = __toESM(require_react());
   var import_react5 = __toESM(require_react());
   var import_warning = __toESM(require_warning());
-  var import_jsx_runtime13 = __toESM(require_jsx_runtime());
-  var FormControl = /* @__PURE__ */ React13.forwardRef(({
+  var import_jsx_runtime11 = __toESM(require_jsx_runtime());
+  var FormControl = /* @__PURE__ */ React11.forwardRef(({
     bsPrefix,
     type,
     size,
@@ -31119,14 +31057,14 @@
       };
     }
     true ? (0, import_warning.default)(controlId == null || !id, "`controlId` is ignored on `<FormControl>` when `id` is specified.") : void 0;
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Component, {
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Component, {
       ...props,
       type,
       size: htmlSize,
       ref,
       readOnly,
       id: id || controlId,
-      className: (0, import_classnames9.default)(className, classes, isValid && `is-valid`, isInvalid && `is-invalid`, type === "color" && `${bsPrefix}-color`)
+      className: (0, import_classnames7.default)(className, classes, isValid && `is-valid`, isInvalid && `is-invalid`, type === "color" && `${bsPrefix}-color`)
     });
   });
   FormControl.displayName = "FormControl";
@@ -31134,14 +31072,14 @@
     Feedback: Feedback_default
   });
 
-  // node_modules/react-bootstrap/esm/FormFloating.js
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormFloating.js
   var FormFloating_default = createWithBsPrefix("form-floating");
 
-  // node_modules/react-bootstrap/esm/FormGroup.js
-  var React14 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormGroup.js
+  var React12 = __toESM(require_react());
   var import_react6 = __toESM(require_react());
-  var import_jsx_runtime14 = __toESM(require_jsx_runtime());
-  var FormGroup = /* @__PURE__ */ React14.forwardRef(({
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime());
+  var FormGroup = /* @__PURE__ */ React12.forwardRef(({
     controlId,
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = "div",
@@ -31150,9 +31088,9 @@
     const context = (0, import_react6.useMemo)(() => ({
       controlId
     }), [controlId]);
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(FormContext_default.Provider, {
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(FormContext_default.Provider, {
       value: context,
-      children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Component, {
+      children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Component, {
         ...props,
         ref
       })
@@ -31161,13 +31099,13 @@
   FormGroup.displayName = "FormGroup";
   var FormGroup_default = FormGroup;
 
-  // node_modules/react-bootstrap/esm/FormLabel.js
-  var import_classnames10 = __toESM(require_classnames());
-  var React15 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormLabel.js
+  var import_classnames8 = __toESM(require_classnames());
+  var React13 = __toESM(require_react());
   var import_react7 = __toESM(require_react());
   var import_warning2 = __toESM(require_warning());
-  var import_jsx_runtime15 = __toESM(require_jsx_runtime());
-  var FormLabel = /* @__PURE__ */ React15.forwardRef(({
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime());
+  var FormLabel = /* @__PURE__ */ React13.forwardRef(({
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = "label",
     bsPrefix,
@@ -31184,11 +31122,11 @@
     let columnClass = "col-form-label";
     if (typeof column === "string")
       columnClass = `${columnClass} ${columnClass}-${column}`;
-    const classes = (0, import_classnames10.default)(className, bsPrefix, visuallyHidden && "visually-hidden", column && columnClass);
+    const classes = (0, import_classnames8.default)(className, bsPrefix, visuallyHidden && "visually-hidden", column && columnClass);
     true ? (0, import_warning2.default)(controlId == null || !htmlFor, "`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.") : void 0;
     htmlFor = htmlFor || controlId;
     if (column)
-      return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Col_default, {
+      return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Col_default, {
         ref,
         as: "label",
         className: classes,
@@ -31197,7 +31135,7 @@
       });
     return (
       // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
-      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Component, {
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Component, {
         ref,
         className: classes,
         htmlFor,
@@ -31208,12 +31146,12 @@
   FormLabel.displayName = "FormLabel";
   var FormLabel_default = FormLabel;
 
-  // node_modules/react-bootstrap/esm/FormRange.js
-  var import_classnames11 = __toESM(require_classnames());
-  var React16 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormRange.js
+  var import_classnames9 = __toESM(require_classnames());
+  var React14 = __toESM(require_react());
   var import_react8 = __toESM(require_react());
-  var import_jsx_runtime16 = __toESM(require_jsx_runtime());
-  var FormRange = /* @__PURE__ */ React16.forwardRef(({
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime());
+  var FormRange = /* @__PURE__ */ React14.forwardRef(({
     bsPrefix,
     className,
     id,
@@ -31223,23 +31161,23 @@
       controlId
     } = (0, import_react8.useContext)(FormContext_default);
     bsPrefix = useBootstrapPrefix(bsPrefix, "form-range");
-    return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("input", {
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("input", {
       ...props,
       type: "range",
       ref,
-      className: (0, import_classnames11.default)(className, bsPrefix),
+      className: (0, import_classnames9.default)(className, bsPrefix),
       id: id || controlId
     });
   });
   FormRange.displayName = "FormRange";
   var FormRange_default = FormRange;
 
-  // node_modules/react-bootstrap/esm/FormSelect.js
-  var import_classnames12 = __toESM(require_classnames());
-  var React17 = __toESM(require_react());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormSelect.js
+  var import_classnames10 = __toESM(require_classnames());
+  var React15 = __toESM(require_react());
   var import_react9 = __toESM(require_react());
-  var import_jsx_runtime17 = __toESM(require_jsx_runtime());
-  var FormSelect = /* @__PURE__ */ React17.forwardRef(({
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime());
+  var FormSelect = /* @__PURE__ */ React15.forwardRef(({
     bsPrefix,
     size,
     htmlSize,
@@ -31253,22 +31191,22 @@
       controlId
     } = (0, import_react9.useContext)(FormContext_default);
     bsPrefix = useBootstrapPrefix(bsPrefix, "form-select");
-    return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("select", {
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("select", {
       ...props,
       size: htmlSize,
       ref,
-      className: (0, import_classnames12.default)(className, bsPrefix, size && `${bsPrefix}-${size}`, isValid && `is-valid`, isInvalid && `is-invalid`),
+      className: (0, import_classnames10.default)(className, bsPrefix, size && `${bsPrefix}-${size}`, isValid && `is-valid`, isInvalid && `is-invalid`),
       id: id || controlId
     });
   });
   FormSelect.displayName = "FormSelect";
   var FormSelect_default = FormSelect;
 
-  // node_modules/react-bootstrap/esm/FormText.js
-  var import_classnames13 = __toESM(require_classnames());
-  var React18 = __toESM(require_react());
-  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
-  var FormText = /* @__PURE__ */ React18.forwardRef(
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FormText.js
+  var import_classnames11 = __toESM(require_classnames());
+  var React16 = __toESM(require_react());
+  var import_jsx_runtime16 = __toESM(require_jsx_runtime());
+  var FormText = /* @__PURE__ */ React16.forwardRef(
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     ({
       bsPrefix,
@@ -31278,20 +31216,20 @@
       ...props
     }, ref) => {
       bsPrefix = useBootstrapPrefix(bsPrefix, "form-text");
-      return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Component, {
+      return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Component, {
         ...props,
         ref,
-        className: (0, import_classnames13.default)(className, bsPrefix, muted && "text-muted")
+        className: (0, import_classnames11.default)(className, bsPrefix, muted && "text-muted")
       });
     }
   );
   FormText.displayName = "FormText";
   var FormText_default = FormText;
 
-  // node_modules/react-bootstrap/esm/Switch.js
-  var React19 = __toESM(require_react());
-  var import_jsx_runtime19 = __toESM(require_jsx_runtime());
-  var Switch = /* @__PURE__ */ React19.forwardRef((props, ref) => /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(FormCheck_default, {
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/Switch.js
+  var React17 = __toESM(require_react());
+  var import_jsx_runtime17 = __toESM(require_jsx_runtime());
+  var Switch = /* @__PURE__ */ React17.forwardRef((props, ref) => /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(FormCheck_default, {
     ...props,
     ref,
     type: "switch"
@@ -31302,12 +31240,12 @@
     Label: FormCheck_default.Label
   });
 
-  // node_modules/react-bootstrap/esm/FloatingLabel.js
-  var import_classnames14 = __toESM(require_classnames());
-  var React20 = __toESM(require_react());
-  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
-  var FloatingLabel = /* @__PURE__ */ React20.forwardRef(({
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/FloatingLabel.js
+  var import_classnames12 = __toESM(require_classnames());
+  var React18 = __toESM(require_react());
+  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime19 = __toESM(require_jsx_runtime());
+  var FloatingLabel = /* @__PURE__ */ React18.forwardRef(({
     bsPrefix,
     className,
     children,
@@ -31316,12 +31254,12 @@
     ...props
   }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, "form-floating");
-    return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(FormGroup_default, {
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(FormGroup_default, {
       ref,
-      className: (0, import_classnames14.default)(className, bsPrefix),
+      className: (0, import_classnames12.default)(className, bsPrefix),
       controlId,
       ...props,
-      children: [children, /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("label", {
+      children: [children, /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("label", {
         htmlFor: controlId,
         children: label
       })]
@@ -31330,8 +31268,8 @@
   FloatingLabel.displayName = "FloatingLabel";
   var FloatingLabel_default = FloatingLabel;
 
-  // node_modules/react-bootstrap/esm/Form.js
-  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/Form.js
+  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
   var propTypes2 = {
     /**
      * The Form `ref` will be forwarded to the underlying element,
@@ -31349,16 +31287,16 @@
     validated: import_prop_types2.default.bool,
     as: import_prop_types2.default.elementType
   };
-  var Form = /* @__PURE__ */ React21.forwardRef(({
+  var Form = /* @__PURE__ */ React19.forwardRef(({
     className,
     validated,
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = "form",
     ...props
-  }, ref) => /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Component, {
+  }, ref) => /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Component, {
     ...props,
     ref,
-    className: (0, import_classnames15.default)(className, validated && "was-validated")
+    className: (0, import_classnames13.default)(className, validated && "was-validated")
   }));
   Form.displayName = "Form";
   Form.propTypes = propTypes2;
@@ -31375,11 +31313,11 @@
     FloatingLabel: FloatingLabel_default
   });
 
-  // node_modules/react-bootstrap/esm/Table.js
-  var import_classnames16 = __toESM(require_classnames());
-  var React22 = __toESM(require_react());
-  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
-  var Table = /* @__PURE__ */ React22.forwardRef(({
+  // node_modules/@canterbury-air-patrol/sar-search-patterns/node_modules/react-bootstrap/esm/Table.js
+  var import_classnames14 = __toESM(require_classnames());
+  var React20 = __toESM(require_react());
+  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
+  var Table = /* @__PURE__ */ React20.forwardRef(({
     bsPrefix,
     className,
     striped,
@@ -31392,8 +31330,8 @@
     ...props
   }, ref) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, "table");
-    const classes = (0, import_classnames16.default)(className, decoratedBsPrefix, variant && `${decoratedBsPrefix}-${variant}`, size && `${decoratedBsPrefix}-${size}`, striped && `${decoratedBsPrefix}-${typeof striped === "string" ? `striped-${striped}` : "striped"}`, bordered && `${decoratedBsPrefix}-bordered`, borderless && `${decoratedBsPrefix}-borderless`, hover && `${decoratedBsPrefix}-hover`);
-    const table = /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("table", {
+    const classes = (0, import_classnames14.default)(className, decoratedBsPrefix, variant && `${decoratedBsPrefix}-${variant}`, size && `${decoratedBsPrefix}-${size}`, striped && `${decoratedBsPrefix}-${typeof striped === "string" ? `striped-${striped}` : "striped"}`, bordered && `${decoratedBsPrefix}-bordered`, borderless && `${decoratedBsPrefix}-borderless`, hover && `${decoratedBsPrefix}-hover`);
+    const table = /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("table", {
       ...props,
       className: classes,
       ref
@@ -31403,7 +31341,7 @@
       if (typeof responsive === "string") {
         responsiveClass = `${responsiveClass}-${responsive}`;
       }
-      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", {
+      return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", {
         className: responsiveClass,
         children: table
       });
@@ -31729,9 +31667,655 @@
   };
 
   // node_modules/@canterbury-air-patrol/speed-time-distance/react.js
+  var import_react20 = __toESM(require_react());
+  var import_prop_types6 = __toESM(require_prop_types());
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/ThemeProvider.js
+  var React22 = __toESM(require_react());
   var import_react11 = __toESM(require_react());
+  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  var DEFAULT_BREAKPOINTS2 = ["xxl", "xl", "lg", "md", "sm", "xs"];
+  var DEFAULT_MIN_BREAKPOINT2 = "xs";
+  var ThemeContext2 = /* @__PURE__ */ React22.createContext({
+    prefixes: {},
+    breakpoints: DEFAULT_BREAKPOINTS2,
+    minBreakpoint: DEFAULT_MIN_BREAKPOINT2
+  });
+  var {
+    Consumer: Consumer2,
+    Provider: Provider2
+  } = ThemeContext2;
+  function useBootstrapPrefix2(prefix, defaultPrefix) {
+    const {
+      prefixes
+    } = (0, import_react11.useContext)(ThemeContext2);
+    return prefix || prefixes[defaultPrefix] || defaultPrefix;
+  }
+  function useBootstrapBreakpoints2() {
+    const {
+      breakpoints
+    } = (0, import_react11.useContext)(ThemeContext2);
+    return breakpoints;
+  }
+  function useBootstrapMinBreakpoint2() {
+    const {
+      minBreakpoint
+    } = (0, import_react11.useContext)(ThemeContext2);
+    return minBreakpoint;
+  }
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/createWithBsPrefix.js
+  var import_classnames15 = __toESM(require_classnames());
+  var React23 = __toESM(require_react());
+  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
+  var pascalCase2 = (str) => str[0].toUpperCase() + camelize(str).slice(1);
+  function createWithBsPrefix2(prefix, {
+    displayName = pascalCase2(prefix),
+    Component,
+    defaultProps
+  } = {}) {
+    const BsComponent = /* @__PURE__ */ React23.forwardRef(({
+      className,
+      bsPrefix,
+      as: Tag = Component || "div",
+      ...props
+    }, ref) => {
+      const componentProps = {
+        ...defaultProps,
+        ...props
+      };
+      const resolvedPrefix = useBootstrapPrefix2(bsPrefix, prefix);
+      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Tag, {
+        ref,
+        className: (0, import_classnames15.default)(className, resolvedPrefix),
+        ...componentProps
+      });
+    });
+    BsComponent.displayName = displayName;
+    return BsComponent;
+  }
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/ElementChildren.js
+  var React24 = __toESM(require_react());
+  function hasChildOfType2(children, type) {
+    return React24.Children.toArray(children).some((child) => /* @__PURE__ */ React24.isValidElement(child) && child.type === type);
+  }
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/Col.js
+  var import_classnames16 = __toESM(require_classnames());
+  var React25 = __toESM(require_react());
+  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
+  function useCol2({
+    as,
+    bsPrefix,
+    className,
+    ...props
+  }) {
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "col");
+    const breakpoints = useBootstrapBreakpoints2();
+    const minBreakpoint = useBootstrapMinBreakpoint2();
+    const spans = [];
+    const classes = [];
+    breakpoints.forEach((brkPoint) => {
+      const propValue = props[brkPoint];
+      delete props[brkPoint];
+      let span;
+      let offset2;
+      let order2;
+      if (typeof propValue === "object" && propValue != null) {
+        ({
+          span,
+          offset: offset2,
+          order: order2
+        } = propValue);
+      } else {
+        span = propValue;
+      }
+      const infix = brkPoint !== minBreakpoint ? `-${brkPoint}` : "";
+      if (span)
+        spans.push(span === true ? `${bsPrefix}${infix}` : `${bsPrefix}${infix}-${span}`);
+      if (order2 != null)
+        classes.push(`order${infix}-${order2}`);
+      if (offset2 != null)
+        classes.push(`offset${infix}-${offset2}`);
+    });
+    return [{
+      ...props,
+      className: (0, import_classnames16.default)(className, ...spans, ...classes)
+    }, {
+      as,
+      bsPrefix,
+      spans
+    }];
+  }
+  var Col2 = /* @__PURE__ */ React25.forwardRef(
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    (props, ref) => {
+      const [{
+        className,
+        ...colProps
+      }, {
+        as: Component = "div",
+        bsPrefix,
+        spans
+      }] = useCol2(props);
+      return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Component, {
+        ...colProps,
+        ref,
+        className: (0, import_classnames16.default)(className, !spans.length && bsPrefix)
+      });
+    }
+  );
+  Col2.displayName = "Col";
+  var Col_default2 = Col2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/Form.js
+  var import_classnames27 = __toESM(require_classnames());
+  var import_prop_types5 = __toESM(require_prop_types());
+  var React39 = __toESM(require_react());
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormCheck.js
+  var import_classnames20 = __toESM(require_classnames());
+  var React30 = __toESM(require_react());
+  var import_react14 = __toESM(require_react());
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/Feedback.js
+  var import_classnames17 = __toESM(require_classnames());
+  var React26 = __toESM(require_react());
   var import_prop_types4 = __toESM(require_prop_types());
-  var SpeedUI = class extends import_react11.default.Component {
+  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
+  var propTypes3 = {
+    /**
+     * Specify whether the feedback is for valid or invalid fields
+     *
+     * @type {('valid'|'invalid')}
+     */
+    type: import_prop_types4.default.string,
+    /** Display feedback as a tooltip. */
+    tooltip: import_prop_types4.default.bool,
+    as: import_prop_types4.default.elementType
+  };
+  var Feedback2 = /* @__PURE__ */ React26.forwardRef(
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    ({
+      as: Component = "div",
+      className,
+      type = "valid",
+      tooltip = false,
+      ...props
+    }, ref) => /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Component, {
+      ...props,
+      ref,
+      className: (0, import_classnames17.default)(className, `${type}-${tooltip ? "tooltip" : "feedback"}`)
+    })
+  );
+  Feedback2.displayName = "Feedback";
+  Feedback2.propTypes = propTypes3;
+  var Feedback_default2 = Feedback2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormCheckInput.js
+  var import_classnames18 = __toESM(require_classnames());
+  var React28 = __toESM(require_react());
+  var import_react12 = __toESM(require_react());
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormContext.js
+  var React27 = __toESM(require_react());
+  var FormContext2 = /* @__PURE__ */ React27.createContext({});
+  var FormContext_default2 = FormContext2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormCheckInput.js
+  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
+  var FormCheckInput2 = /* @__PURE__ */ React28.forwardRef(({
+    id,
+    bsPrefix,
+    className,
+    type = "checkbox",
+    isValid = false,
+    isInvalid = false,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = "input",
+    ...props
+  }, ref) => {
+    const {
+      controlId
+    } = (0, import_react12.useContext)(FormContext_default2);
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "form-check-input");
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(Component, {
+      ...props,
+      ref,
+      type,
+      id: id || controlId,
+      className: (0, import_classnames18.default)(className, bsPrefix, isValid && "is-valid", isInvalid && "is-invalid")
+    });
+  });
+  FormCheckInput2.displayName = "FormCheckInput";
+  var FormCheckInput_default2 = FormCheckInput2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormCheckLabel.js
+  var import_classnames19 = __toESM(require_classnames());
+  var React29 = __toESM(require_react());
+  var import_react13 = __toESM(require_react());
+  var import_jsx_runtime27 = __toESM(require_jsx_runtime());
+  var FormCheckLabel2 = /* @__PURE__ */ React29.forwardRef(({
+    bsPrefix,
+    className,
+    htmlFor,
+    ...props
+  }, ref) => {
+    const {
+      controlId
+    } = (0, import_react13.useContext)(FormContext_default2);
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "form-check-label");
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("label", {
+      ...props,
+      ref,
+      htmlFor: htmlFor || controlId,
+      className: (0, import_classnames19.default)(className, bsPrefix)
+    });
+  });
+  FormCheckLabel2.displayName = "FormCheckLabel";
+  var FormCheckLabel_default2 = FormCheckLabel2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormCheck.js
+  var import_jsx_runtime28 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
+  var FormCheck2 = /* @__PURE__ */ React30.forwardRef(({
+    id,
+    bsPrefix,
+    bsSwitchPrefix,
+    inline = false,
+    reverse = false,
+    disabled = false,
+    isValid = false,
+    isInvalid = false,
+    feedbackTooltip = false,
+    feedback,
+    feedbackType,
+    className,
+    style,
+    title = "",
+    type = "checkbox",
+    label,
+    children,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as = "input",
+    ...props
+  }, ref) => {
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "form-check");
+    bsSwitchPrefix = useBootstrapPrefix2(bsSwitchPrefix, "form-switch");
+    const {
+      controlId
+    } = (0, import_react14.useContext)(FormContext_default2);
+    const innerFormContext = (0, import_react14.useMemo)(() => ({
+      controlId: id || controlId
+    }), [controlId, id]);
+    const hasLabel = !children && label != null && label !== false || hasChildOfType2(children, FormCheckLabel_default2);
+    const input = /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(FormCheckInput_default2, {
+      ...props,
+      type: type === "switch" ? "checkbox" : type,
+      ref,
+      isValid,
+      isInvalid,
+      disabled,
+      as
+    });
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(FormContext_default2.Provider, {
+      value: innerFormContext,
+      children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", {
+        style,
+        className: (0, import_classnames20.default)(className, hasLabel && bsPrefix, inline && `${bsPrefix}-inline`, reverse && `${bsPrefix}-reverse`, type === "switch" && bsSwitchPrefix),
+        children: children || /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(import_jsx_runtime29.Fragment, {
+          children: [input, hasLabel && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(FormCheckLabel_default2, {
+            title,
+            children: label
+          }), feedback && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Feedback_default2, {
+            type: feedbackType,
+            tooltip: feedbackTooltip,
+            children: feedback
+          })]
+        })
+      })
+    });
+  });
+  FormCheck2.displayName = "FormCheck";
+  var FormCheck_default2 = Object.assign(FormCheck2, {
+    Input: FormCheckInput_default2,
+    Label: FormCheckLabel_default2
+  });
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormControl.js
+  var import_classnames21 = __toESM(require_classnames());
+  var React31 = __toESM(require_react());
+  var import_react15 = __toESM(require_react());
+  var import_warning3 = __toESM(require_warning());
+  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
+  var FormControl2 = /* @__PURE__ */ React31.forwardRef(({
+    bsPrefix,
+    type,
+    size,
+    htmlSize,
+    id,
+    className,
+    isValid = false,
+    isInvalid = false,
+    plaintext,
+    readOnly,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = "input",
+    ...props
+  }, ref) => {
+    const {
+      controlId
+    } = (0, import_react15.useContext)(FormContext_default2);
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "form-control");
+    let classes;
+    if (plaintext) {
+      classes = {
+        [`${bsPrefix}-plaintext`]: true
+      };
+    } else {
+      classes = {
+        [bsPrefix]: true,
+        [`${bsPrefix}-${size}`]: size
+      };
+    }
+    true ? (0, import_warning3.default)(controlId == null || !id, "`controlId` is ignored on `<FormControl>` when `id` is specified.") : void 0;
+    return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Component, {
+      ...props,
+      type,
+      size: htmlSize,
+      ref,
+      readOnly,
+      id: id || controlId,
+      className: (0, import_classnames21.default)(className, classes, isValid && `is-valid`, isInvalid && `is-invalid`, type === "color" && `${bsPrefix}-color`)
+    });
+  });
+  FormControl2.displayName = "FormControl";
+  var FormControl_default2 = Object.assign(FormControl2, {
+    Feedback: Feedback_default2
+  });
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormFloating.js
+  var FormFloating_default2 = createWithBsPrefix2("form-floating");
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormGroup.js
+  var React32 = __toESM(require_react());
+  var import_react16 = __toESM(require_react());
+  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
+  var FormGroup2 = /* @__PURE__ */ React32.forwardRef(({
+    controlId,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = "div",
+    ...props
+  }, ref) => {
+    const context = (0, import_react16.useMemo)(() => ({
+      controlId
+    }), [controlId]);
+    return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(FormContext_default2.Provider, {
+      value: context,
+      children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Component, {
+        ...props,
+        ref
+      })
+    });
+  });
+  FormGroup2.displayName = "FormGroup";
+  var FormGroup_default2 = FormGroup2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormLabel.js
+  var import_classnames22 = __toESM(require_classnames());
+  var React33 = __toESM(require_react());
+  var import_react17 = __toESM(require_react());
+  var import_warning4 = __toESM(require_warning());
+  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
+  var FormLabel2 = /* @__PURE__ */ React33.forwardRef(({
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = "label",
+    bsPrefix,
+    column = false,
+    visuallyHidden = false,
+    className,
+    htmlFor,
+    ...props
+  }, ref) => {
+    const {
+      controlId
+    } = (0, import_react17.useContext)(FormContext_default2);
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "form-label");
+    let columnClass = "col-form-label";
+    if (typeof column === "string")
+      columnClass = `${columnClass} ${columnClass}-${column}`;
+    const classes = (0, import_classnames22.default)(className, bsPrefix, visuallyHidden && "visually-hidden", column && columnClass);
+    true ? (0, import_warning4.default)(controlId == null || !htmlFor, "`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.") : void 0;
+    htmlFor = htmlFor || controlId;
+    if (column)
+      return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Col_default2, {
+        ref,
+        as: "label",
+        className: classes,
+        htmlFor,
+        ...props
+      });
+    return (
+      // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Component, {
+        ref,
+        className: classes,
+        htmlFor,
+        ...props
+      })
+    );
+  });
+  FormLabel2.displayName = "FormLabel";
+  var FormLabel_default2 = FormLabel2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormRange.js
+  var import_classnames23 = __toESM(require_classnames());
+  var React34 = __toESM(require_react());
+  var import_react18 = __toESM(require_react());
+  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
+  var FormRange2 = /* @__PURE__ */ React34.forwardRef(({
+    bsPrefix,
+    className,
+    id,
+    ...props
+  }, ref) => {
+    const {
+      controlId
+    } = (0, import_react18.useContext)(FormContext_default2);
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "form-range");
+    return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("input", {
+      ...props,
+      type: "range",
+      ref,
+      className: (0, import_classnames23.default)(className, bsPrefix),
+      id: id || controlId
+    });
+  });
+  FormRange2.displayName = "FormRange";
+  var FormRange_default2 = FormRange2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormSelect.js
+  var import_classnames24 = __toESM(require_classnames());
+  var React35 = __toESM(require_react());
+  var import_react19 = __toESM(require_react());
+  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
+  var FormSelect2 = /* @__PURE__ */ React35.forwardRef(({
+    bsPrefix,
+    size,
+    htmlSize,
+    className,
+    isValid = false,
+    isInvalid = false,
+    id,
+    ...props
+  }, ref) => {
+    const {
+      controlId
+    } = (0, import_react19.useContext)(FormContext_default2);
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "form-select");
+    return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("select", {
+      ...props,
+      size: htmlSize,
+      ref,
+      className: (0, import_classnames24.default)(className, bsPrefix, size && `${bsPrefix}-${size}`, isValid && `is-valid`, isInvalid && `is-invalid`),
+      id: id || controlId
+    });
+  });
+  FormSelect2.displayName = "FormSelect";
+  var FormSelect_default2 = FormSelect2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FormText.js
+  var import_classnames25 = __toESM(require_classnames());
+  var React36 = __toESM(require_react());
+  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
+  var FormText2 = /* @__PURE__ */ React36.forwardRef(
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    ({
+      bsPrefix,
+      className,
+      as: Component = "small",
+      muted,
+      ...props
+    }, ref) => {
+      bsPrefix = useBootstrapPrefix2(bsPrefix, "form-text");
+      return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Component, {
+        ...props,
+        ref,
+        className: (0, import_classnames25.default)(className, bsPrefix, muted && "text-muted")
+      });
+    }
+  );
+  FormText2.displayName = "FormText";
+  var FormText_default2 = FormText2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/Switch.js
+  var React37 = __toESM(require_react());
+  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
+  var Switch2 = /* @__PURE__ */ React37.forwardRef((props, ref) => /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(FormCheck_default2, {
+    ...props,
+    ref,
+    type: "switch"
+  }));
+  Switch2.displayName = "Switch";
+  var Switch_default2 = Object.assign(Switch2, {
+    Input: FormCheck_default2.Input,
+    Label: FormCheck_default2.Label
+  });
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/FloatingLabel.js
+  var import_classnames26 = __toESM(require_classnames());
+  var React38 = __toESM(require_react());
+  var import_jsx_runtime38 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime39 = __toESM(require_jsx_runtime());
+  var FloatingLabel2 = /* @__PURE__ */ React38.forwardRef(({
+    bsPrefix,
+    className,
+    children,
+    controlId,
+    label,
+    ...props
+  }, ref) => {
+    bsPrefix = useBootstrapPrefix2(bsPrefix, "form-floating");
+    return /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)(FormGroup_default2, {
+      ref,
+      className: (0, import_classnames26.default)(className, bsPrefix),
+      controlId,
+      ...props,
+      children: [children, /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("label", {
+        htmlFor: controlId,
+        children: label
+      })]
+    });
+  });
+  FloatingLabel2.displayName = "FloatingLabel";
+  var FloatingLabel_default2 = FloatingLabel2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/Form.js
+  var import_jsx_runtime40 = __toESM(require_jsx_runtime());
+  var propTypes4 = {
+    /**
+     * The Form `ref` will be forwarded to the underlying element,
+     * which means, unless it's rendered `as` a composite component,
+     * it will be a DOM node, when resolved.
+     *
+     * @type {ReactRef}
+     * @alias ref
+     */
+    _ref: import_prop_types5.default.any,
+    /**
+     * Mark a form as having been validated. Setting it to `true` will
+     * toggle any validation styles on the forms elements.
+     */
+    validated: import_prop_types5.default.bool,
+    as: import_prop_types5.default.elementType
+  };
+  var Form2 = /* @__PURE__ */ React39.forwardRef(({
+    className,
+    validated,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = "form",
+    ...props
+  }, ref) => /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(Component, {
+    ...props,
+    ref,
+    className: (0, import_classnames27.default)(className, validated && "was-validated")
+  }));
+  Form2.displayName = "Form";
+  Form2.propTypes = propTypes4;
+  var Form_default2 = Object.assign(Form2, {
+    Group: FormGroup_default2,
+    Control: FormControl_default2,
+    Floating: FormFloating_default2,
+    Check: FormCheck_default2,
+    Switch: Switch_default2,
+    Label: FormLabel_default2,
+    Text: FormText_default2,
+    Range: FormRange_default2,
+    Select: FormSelect_default2,
+    FloatingLabel: FloatingLabel_default2
+  });
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/node_modules/react-bootstrap/esm/Table.js
+  var import_classnames28 = __toESM(require_classnames());
+  var React40 = __toESM(require_react());
+  var import_jsx_runtime41 = __toESM(require_jsx_runtime());
+  var Table2 = /* @__PURE__ */ React40.forwardRef(({
+    bsPrefix,
+    className,
+    striped,
+    bordered,
+    borderless,
+    hover,
+    size,
+    variant,
+    responsive,
+    ...props
+  }, ref) => {
+    const decoratedBsPrefix = useBootstrapPrefix2(bsPrefix, "table");
+    const classes = (0, import_classnames28.default)(className, decoratedBsPrefix, variant && `${decoratedBsPrefix}-${variant}`, size && `${decoratedBsPrefix}-${size}`, striped && `${decoratedBsPrefix}-${typeof striped === "string" ? `striped-${striped}` : "striped"}`, bordered && `${decoratedBsPrefix}-bordered`, borderless && `${decoratedBsPrefix}-borderless`, hover && `${decoratedBsPrefix}-hover`);
+    const table = /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("table", {
+      ...props,
+      className: classes,
+      ref
+    });
+    if (responsive) {
+      let responsiveClass = `${decoratedBsPrefix}-responsive`;
+      if (typeof responsive === "string") {
+        responsiveClass = `${responsiveClass}-${responsive}`;
+      }
+      return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", {
+        className: responsiveClass,
+        children: table
+      });
+    }
+    return table;
+  });
+  var Table_default2 = Table2;
+
+  // node_modules/@canterbury-air-patrol/speed-time-distance/react.js
+  var SpeedUI = class extends import_react20.default.Component {
     constructor(props) {
       super(props);
       this.handleChangeValue = this.handleChangeValue.bind(this);
@@ -31769,17 +32353,17 @@
     render() {
       const units = [];
       for (const key in Speed.speedUnits) {
-        units.push(/* @__PURE__ */ import_react11.default.createElement("option", { key, value: key }, key));
+        units.push(/* @__PURE__ */ import_react20.default.createElement("option", { key, value: key }, key));
       }
-      return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(Form_default.Control, { type: "number", onChange: this.handleChangeValue, value: this.state.speed.speed, disabled: this.props.locked }), /* @__PURE__ */ import_react11.default.createElement(Form_default.Select, { onChange: this.handleChangeUnits, defaultValue: this.state.speed.currentUnits }, units));
+      return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(Form_default2.Control, { type: "number", onChange: this.handleChangeValue, value: this.state.speed.speed, disabled: this.props.locked }), /* @__PURE__ */ import_react20.default.createElement(Form_default2.Select, { onChange: this.handleChangeUnits, defaultValue: this.state.speed.currentUnits }, units));
     }
   };
   SpeedUI.propTypes = {
-    speed: import_prop_types4.default.object,
-    updateSpeed: import_prop_types4.default.func,
-    locked: import_prop_types4.default.bool
+    speed: import_prop_types6.default.object,
+    updateSpeed: import_prop_types6.default.func,
+    locked: import_prop_types6.default.bool
   };
-  var DistanceUI = class extends import_react11.default.Component {
+  var DistanceUI = class extends import_react20.default.Component {
     constructor(props) {
       super(props);
       this.handleChangeValue = this.handleChangeValue.bind(this);
@@ -31817,17 +32401,17 @@
     render() {
       const units = [];
       for (const key in Distance.distanceUnits) {
-        units.push(/* @__PURE__ */ import_react11.default.createElement("option", { key, value: key }, key));
+        units.push(/* @__PURE__ */ import_react20.default.createElement("option", { key, value: key }, key));
       }
-      return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(Form_default.Control, { type: "number", onChange: this.handleChangeValue, value: this.state.distance.distance, disabled: this.props.locked }), /* @__PURE__ */ import_react11.default.createElement(Form_default.Select, { onChange: this.handleChangeUnits }, units));
+      return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(Form_default2.Control, { type: "number", onChange: this.handleChangeValue, value: this.state.distance.distance, disabled: this.props.locked }), /* @__PURE__ */ import_react20.default.createElement(Form_default2.Select, { onChange: this.handleChangeUnits }, units));
     }
   };
   DistanceUI.propTypes = {
-    distance: import_prop_types4.default.object,
-    updateDistance: import_prop_types4.default.func,
-    locked: import_prop_types4.default.bool
+    distance: import_prop_types6.default.object,
+    updateDistance: import_prop_types6.default.func,
+    locked: import_prop_types6.default.bool
   };
-  var TimeUI = class extends import_react11.default.Component {
+  var TimeUI = class extends import_react20.default.Component {
     constructor(props) {
       super(props);
       this.handleChangeValue = this.handleChangeValue.bind(this);
@@ -31865,17 +32449,17 @@
     render() {
       const units = [];
       for (const key in Time.timeUnits) {
-        units.push(/* @__PURE__ */ import_react11.default.createElement("option", { key, value: key }, key));
+        units.push(/* @__PURE__ */ import_react20.default.createElement("option", { key, value: key }, key));
       }
-      return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(Form_default.Control, { type: "number", onChange: this.handleChangeValue, value: this.state.time.time, disabled: this.props.locked }), /* @__PURE__ */ import_react11.default.createElement(Form_default.Select, { onChange: this.handleChangeUnits, defaultValue: this.state.time.currentUnits }, units));
+      return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(Form_default2.Control, { type: "number", onChange: this.handleChangeValue, value: this.state.time.time, disabled: this.props.locked }), /* @__PURE__ */ import_react20.default.createElement(Form_default2.Select, { onChange: this.handleChangeUnits, defaultValue: this.state.time.currentUnits }, units));
     }
   };
   TimeUI.propTypes = {
-    time: import_prop_types4.default.object,
-    updateTime: import_prop_types4.default.func,
-    locked: import_prop_types4.default.bool
+    time: import_prop_types6.default.object,
+    updateTime: import_prop_types6.default.func,
+    locked: import_prop_types6.default.bool
   };
-  var SpeedTimeDistanceUI = class extends import_react11.default.Component {
+  var SpeedTimeDistanceUI = class extends import_react20.default.Component {
     constructor(props) {
       super(props);
       this.onChangeSpeed = this.onChangeSpeed.bind(this);
@@ -31968,29 +32552,113 @@
     render() {
       let selector = null;
       if (!this.props.lockSelector) {
-        selector = /* @__PURE__ */ import_react11.default.createElement("tr", null, /* @__PURE__ */ import_react11.default.createElement("td", null, /* @__PURE__ */ import_react11.default.createElement(Form_default.Label, null, "Calculate")), /* @__PURE__ */ import_react11.default.createElement("td", null, /* @__PURE__ */ import_react11.default.createElement(Form_default.Select, { onChange: this.handleChangeCalculation, defaultValue: this.state.calculate }, /* @__PURE__ */ import_react11.default.createElement("option", { key: "speed", value: "speed" }, "Speed"), /* @__PURE__ */ import_react11.default.createElement("option", { key: "time", value: "time" }, "Time"), /* @__PURE__ */ import_react11.default.createElement("option", { key: "distance", value: "distance" }, "Distance"))));
+        selector = /* @__PURE__ */ import_react20.default.createElement("tr", null, /* @__PURE__ */ import_react20.default.createElement("td", null, /* @__PURE__ */ import_react20.default.createElement(Form_default2.Label, null, "Calculate")), /* @__PURE__ */ import_react20.default.createElement("td", null, /* @__PURE__ */ import_react20.default.createElement(Form_default2.Select, { onChange: this.handleChangeCalculation, defaultValue: this.state.calculate }, /* @__PURE__ */ import_react20.default.createElement("option", { key: "speed", value: "speed" }, "Speed"), /* @__PURE__ */ import_react20.default.createElement("option", { key: "time", value: "time" }, "Time"), /* @__PURE__ */ import_react20.default.createElement("option", { key: "distance", value: "distance" }, "Distance"))));
       }
-      return /* @__PURE__ */ import_react11.default.createElement(Table_default, null, /* @__PURE__ */ import_react11.default.createElement("tbody", null, selector, /* @__PURE__ */ import_react11.default.createElement("tr", null, /* @__PURE__ */ import_react11.default.createElement("td", null, /* @__PURE__ */ import_react11.default.createElement(Form_default.Label, null, "Speed")), /* @__PURE__ */ import_react11.default.createElement("td", null, /* @__PURE__ */ import_react11.default.createElement(SpeedUI, { speed: this.state.speed, updateSpeed: this.onChangeSpeed, locked: this.props.lockSpeed || this.state.calculate === "speed" }))), /* @__PURE__ */ import_react11.default.createElement("tr", null, /* @__PURE__ */ import_react11.default.createElement("td", null, /* @__PURE__ */ import_react11.default.createElement(Form_default.Label, null, "Time")), /* @__PURE__ */ import_react11.default.createElement("td", null, /* @__PURE__ */ import_react11.default.createElement(TimeUI, { time: this.state.time, updateTime: this.onChangeTime, locked: this.props.lockTime || this.state.calculate === "time" }))), /* @__PURE__ */ import_react11.default.createElement("tr", null, /* @__PURE__ */ import_react11.default.createElement("td", null, /* @__PURE__ */ import_react11.default.createElement(Form_default.Label, null, "Distance")), /* @__PURE__ */ import_react11.default.createElement("td", null, /* @__PURE__ */ import_react11.default.createElement(DistanceUI, { distance: this.state.distance, updateDistance: this.onChangeDistance, locked: this.props.lockDistance || this.state.calculate === "distance" })))));
+      return /* @__PURE__ */ import_react20.default.createElement(Table_default2, null, /* @__PURE__ */ import_react20.default.createElement("tbody", null, selector, /* @__PURE__ */ import_react20.default.createElement("tr", null, /* @__PURE__ */ import_react20.default.createElement("td", null, /* @__PURE__ */ import_react20.default.createElement(Form_default2.Label, null, "Speed")), /* @__PURE__ */ import_react20.default.createElement("td", null, /* @__PURE__ */ import_react20.default.createElement(SpeedUI, { speed: this.state.speed, updateSpeed: this.onChangeSpeed, locked: this.props.lockSpeed || this.state.calculate === "speed" }))), /* @__PURE__ */ import_react20.default.createElement("tr", null, /* @__PURE__ */ import_react20.default.createElement("td", null, /* @__PURE__ */ import_react20.default.createElement(Form_default2.Label, null, "Time")), /* @__PURE__ */ import_react20.default.createElement("td", null, /* @__PURE__ */ import_react20.default.createElement(TimeUI, { time: this.state.time, updateTime: this.onChangeTime, locked: this.props.lockTime || this.state.calculate === "time" }))), /* @__PURE__ */ import_react20.default.createElement("tr", null, /* @__PURE__ */ import_react20.default.createElement("td", null, /* @__PURE__ */ import_react20.default.createElement(Form_default2.Label, null, "Distance")), /* @__PURE__ */ import_react20.default.createElement("td", null, /* @__PURE__ */ import_react20.default.createElement(DistanceUI, { distance: this.state.distance, updateDistance: this.onChangeDistance, locked: this.props.lockDistance || this.state.calculate === "distance" })))));
     }
   };
   SpeedTimeDistanceUI.propTypes = {
-    calculate: import_prop_types4.default.string,
-    lockSelector: import_prop_types4.default.bool,
-    lockSpeed: import_prop_types4.default.bool,
-    lockTime: import_prop_types4.default.bool,
-    lockDistance: import_prop_types4.default.bool,
-    speed: import_prop_types4.default.object,
-    time: import_prop_types4.default.object,
-    distance: import_prop_types4.default.object,
-    updateSpeed: import_prop_types4.default.func,
-    updateTime: import_prop_types4.default.func,
-    updateDistance: import_prop_types4.default.func
+    calculate: import_prop_types6.default.string,
+    lockSelector: import_prop_types6.default.bool,
+    lockSpeed: import_prop_types6.default.bool,
+    lockTime: import_prop_types6.default.bool,
+    lockDistance: import_prop_types6.default.bool,
+    speed: import_prop_types6.default.object,
+    time: import_prop_types6.default.object,
+    distance: import_prop_types6.default.object,
+    updateSpeed: import_prop_types6.default.func,
+    updateTime: import_prop_types6.default.func,
+    updateDistance: import_prop_types6.default.func
   };
+
+  // node_modules/react-bootstrap/esm/ThemeProvider.js
+  var React42 = __toESM(require_react());
+  var import_react21 = __toESM(require_react());
+  var import_jsx_runtime42 = __toESM(require_jsx_runtime());
+  var DEFAULT_BREAKPOINTS3 = ["xxl", "xl", "lg", "md", "sm", "xs"];
+  var DEFAULT_MIN_BREAKPOINT3 = "xs";
+  var ThemeContext3 = /* @__PURE__ */ React42.createContext({
+    prefixes: {},
+    breakpoints: DEFAULT_BREAKPOINTS3,
+    minBreakpoint: DEFAULT_MIN_BREAKPOINT3
+  });
+  var {
+    Consumer: Consumer3,
+    Provider: Provider3
+  } = ThemeContext3;
+  function useBootstrapPrefix3(prefix, defaultPrefix) {
+    const {
+      prefixes
+    } = (0, import_react21.useContext)(ThemeContext3);
+    return prefix || prefixes[defaultPrefix] || defaultPrefix;
+  }
+
+  // node_modules/react-bootstrap/esm/Button.js
+  var import_classnames29 = __toESM(require_classnames());
+  var React43 = __toESM(require_react());
+  var import_jsx_runtime43 = __toESM(require_jsx_runtime());
+  var Button3 = /* @__PURE__ */ React43.forwardRef(({
+    as,
+    bsPrefix,
+    variant = "primary",
+    size,
+    active = false,
+    disabled = false,
+    className,
+    ...props
+  }, ref) => {
+    const prefix = useBootstrapPrefix3(bsPrefix, "btn");
+    const [buttonProps, {
+      tagName
+    }] = useButtonProps({
+      tagName: as,
+      disabled,
+      ...props
+    });
+    const Component = tagName;
+    return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(Component, {
+      ...buttonProps,
+      ...props,
+      ref,
+      disabled,
+      className: (0, import_classnames29.default)(className, prefix, active && "active", variant && `${prefix}-${variant}`, size && `${prefix}-${size}`, props.href && disabled && "disabled")
+    });
+  });
+  Button3.displayName = "Button";
+  var Button_default = Button3;
+
+  // node_modules/react-bootstrap/esm/ButtonGroup.js
+  var import_classnames30 = __toESM(require_classnames());
+  var React44 = __toESM(require_react());
+  var import_jsx_runtime44 = __toESM(require_jsx_runtime());
+  var ButtonGroup = /* @__PURE__ */ React44.forwardRef(({
+    bsPrefix,
+    size,
+    vertical = false,
+    className,
+    role = "group",
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = "div",
+    ...rest
+  }, ref) => {
+    const prefix = useBootstrapPrefix3(bsPrefix, "btn-group");
+    let baseClass = prefix;
+    if (vertical)
+      baseClass = `${prefix}-vertical`;
+    return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(Component, {
+      ...rest,
+      ref,
+      role,
+      className: (0, import_classnames30.default)(className, baseClass, size && `${prefix}-${size}`)
+    });
+  });
+  ButtonGroup.displayName = "ButtonGroup";
+  var ButtonGroup_default = ButtonGroup;
 
   // sar-search-runner.js
   var SearchTimer = ({ runTime, run, complete }) => {
-    const [remainingTime, setRemainingTime] = (0, import_react12.useState)(runTime);
-    const [running, setRunning] = (0, import_react12.useState)(run);
+    const [remainingTime, setRemainingTime] = (0, import_react22.useState)(runTime);
+    const [running, setRunning] = (0, import_react22.useState)(run);
     const updateRemainingTime = () => {
       if (running) {
         if (remainingTime <= 1) {
@@ -32002,20 +32670,20 @@
         setRemainingTime(remainingTime - 1);
       }
     };
-    (0, import_react12.useEffect)(() => {
+    (0, import_react22.useEffect)(() => {
       const interval = setInterval(() => {
         updateRemainingTime();
       }, 1e3);
       return () => clearInterval(interval);
     }, [remainingTime]);
-    return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, "Turn in: ", remainingTime, " seconds");
+    return /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, "Turn in: ", remainingTime, " seconds");
   };
   SearchTimer.propTypes = {
-    runTime: import_prop_types5.default.number.isRequired,
-    run: import_prop_types5.default.bool,
-    complete: import_prop_types5.default.func
+    runTime: import_prop_types7.default.number.isRequired,
+    run: import_prop_types7.default.bool,
+    complete: import_prop_types7.default.func
   };
-  var SearchRunner = class extends import_react12.default.Component {
+  var SearchRunner = class extends import_react22.default.Component {
     constructor(props) {
       super(props);
       this.onChangeSpeed = this.onChangeSpeed.bind(this);
@@ -32108,37 +32776,37 @@
       const time = new Time(distance.getDistance("m") / this.state.speed.getSpeed("m/s"), "seconds");
       const buttons = [];
       if (this.state.search.complete || this.state.searchLeg > 1) {
-        buttons.push(/* @__PURE__ */ import_react12.default.createElement(Button_default, { key: "reset", onClick: this.handleReset }, "Reset"));
+        buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "reset", onClick: this.handleReset }, "Reset"));
       }
       if (!this.state.search.complete) {
         if (this.state.running) {
-          buttons.push(/* @__PURE__ */ import_react12.default.createElement(Button_default, { key: "pause", onClick: this.handlePause }, "Pause"));
+          buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "pause", onClick: this.handlePause }, "Pause"));
         } else {
           if (this.state.searchLeg > 1) {
-            buttons.push(/* @__PURE__ */ import_react12.default.createElement(Button_default, { key: "back", onClick: this.handleBackLeg }, "Previous"));
-            buttons.push(/* @__PURE__ */ import_react12.default.createElement(Button_default, { key: "resume", onClick: this.handleRun }, "Resume"));
+            buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "back", onClick: this.handleBackLeg }, "Previous"));
+            buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "resume", onClick: this.handleRun }, "Resume"));
           } else {
-            buttons.push(/* @__PURE__ */ import_react12.default.createElement(Button_default, { key: "run", onClick: this.handleRun }, "Run"));
+            buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "run", onClick: this.handleRun }, "Run"));
           }
           if (!this.state.search.complete) {
-            buttons.push(/* @__PURE__ */ import_react12.default.createElement(Button_default, { key: "skip", onClick: this.handleSkipLeg }, "Skip"));
+            buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "skip", onClick: this.handleSkipLeg }, "Skip"));
           }
         }
       }
-      let timer = /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null);
+      let timer = /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null);
       let instructionText = "Complete";
       if (!this.state.search.complete) {
         if (this.state.running) {
-          timer = /* @__PURE__ */ import_react12.default.createElement("h1", null, /* @__PURE__ */ import_react12.default.createElement(SearchTimer, { key: "timer" + this.state.searchLeg, runTime: Math.round(time.getTime("seconds")), run: this.state.running, complete: this.onCompleteTimer }));
+          timer = /* @__PURE__ */ import_react22.default.createElement("h1", null, /* @__PURE__ */ import_react22.default.createElement(SearchTimer, { key: "timer" + this.state.searchLeg, runTime: Math.round(time.getTime("seconds")), run: this.state.running, complete: this.onCompleteTimer }));
         }
         instructionText = `Head ${this.humanBearing(this.state.search.leg.bearing)}`;
         if (this.state.search.currentLeg + 1 <= this.state.search.searchLegs.length) {
           instructionText += `, Next: ${this.humanBearing(this.state.search.searchLegs[this.state.search.currentLeg].bearing)}`;
         }
       }
-      const instruction = /* @__PURE__ */ import_react12.default.createElement("h1", null, instructionText);
-      const totalDistance = /* @__PURE__ */ import_react12.default.createElement("h1", null, "Total Length: ", /* @__PURE__ */ import_react12.default.createElement(DistanceUI, { distance: new Distance(this.state.search.length, "m"), locked: true }));
-      return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(
+      const instruction = /* @__PURE__ */ import_react22.default.createElement("h1", null, instructionText);
+      const totalDistance = /* @__PURE__ */ import_react22.default.createElement("h1", null, "Total Length: ", /* @__PURE__ */ import_react22.default.createElement(DistanceUI, { distance: new Distance(this.state.search.length, "m"), locked: true }));
+      return /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, /* @__PURE__ */ import_react22.default.createElement(
         SpeedTimeDistanceUI,
         {
           key: "std" + this.state.searchLeg,
@@ -32151,14 +32819,14 @@
           updateTime: this.onChangeTime,
           updateSpeed: this.onChangeSpeed
         }
-      ), /* @__PURE__ */ import_react12.default.createElement(ButtonGroup_default, null, buttons), timer, instruction, /* @__PURE__ */ import_react12.default.createElement(SearchDisplay, { key: "display" + this.state.searchLeg, search: this.state.search }), totalDistance);
+      ), /* @__PURE__ */ import_react22.default.createElement(ButtonGroup_default, null, buttons), timer, instruction, /* @__PURE__ */ import_react22.default.createElement(SearchDisplay, { key: "display" + this.state.searchLeg, search: this.state.search }), totalDistance);
     }
   };
   SearchRunner.propTypes = {
-    search: import_prop_types5.default.object,
-    complete: import_prop_types5.default.func
+    search: import_prop_types7.default.object,
+    complete: import_prop_types7.default.func
   };
-  var SearchRunnerConfiguration = class extends import_react12.default.Component {
+  var SearchRunnerConfiguration = class extends import_react22.default.Component {
     constructor(props) {
       super(props);
       this.onChangeSearch = this.onChangeSearch.bind(this);
@@ -32172,13 +32840,13 @@
       });
     }
     render() {
-      return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(SearchConfiguration, { updateSearch: this.onChangeSearch }), /* @__PURE__ */ import_react12.default.createElement(SearchRunner, { key: `${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.multiplier}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`, search: this.state.search }));
+      return /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, /* @__PURE__ */ import_react22.default.createElement(SearchConfiguration, { updateSearch: this.onChangeSearch }), /* @__PURE__ */ import_react22.default.createElement(SearchRunner, { key: `${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.multiplier}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`, search: this.state.search }));
     }
   };
 
   // example.js
   var root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react15.default.createElement(SearchRunnerConfiguration, null));
+  root.render(/* @__PURE__ */ import_react25.default.createElement(SearchRunnerConfiguration, null));
 })();
 /*! Bundled license information:
 
