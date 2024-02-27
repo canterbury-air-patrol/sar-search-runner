@@ -27290,7 +27290,7 @@
       }
     }
   };
-  var VERSION = "5.3.2";
+  var VERSION = "5.3.3";
   var BaseComponent = class extends Config {
     constructor(element, config) {
       super();
@@ -27349,9 +27349,9 @@
       if (hrefAttribute.includes("#") && !hrefAttribute.startsWith("#")) {
         hrefAttribute = `#${hrefAttribute.split("#")[1]}`;
       }
-      selector = hrefAttribute && hrefAttribute !== "#" ? parseSelector(hrefAttribute.trim()) : null;
+      selector = hrefAttribute && hrefAttribute !== "#" ? hrefAttribute.trim() : null;
     }
-    return selector;
+    return selector ? selector.split(",").map((sel) => parseSelector(sel)).join(",") : null;
   };
   var SelectorEngine = {
     find(selector, element = document.documentElement) {
@@ -29161,7 +29161,10 @@
     br: [],
     col: [],
     code: [],
+    dd: [],
     div: [],
+    dl: [],
+    dt: [],
     em: [],
     hr: [],
     h1: [],
@@ -32933,8 +32936,8 @@ react/cjs/react-jsx-runtime.development.js:
 
 bootstrap/dist/js/bootstrap.esm.js:
   (*!
-    * Bootstrap v5.3.2 (https://getbootstrap.com/)
-    * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+    * Bootstrap v5.3.3 (https://getbootstrap.com/)
+    * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
     *)
 */
