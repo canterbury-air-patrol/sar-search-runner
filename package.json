@@ -5,7 +5,7 @@
   "main": "sar-search-runner.js",
   "scripts": {
     "build": "esbuild example.js --bundle --loader:.js=jsx --outdir=out",
-    "check": "eslint *.js",
+    "check": "eslint *.js && prettier -c *.js",
     "start": "http-server -p 8000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,6 +32,7 @@
     "eslint-plugin-react": "^7.37.1",
     "globals": "^15.11.0",
     "http-server": "^14.1.1",
+    "prettier": "^3.3.3",
     "react-dom": "~18.3.1"
   },
   "dependencies": {
