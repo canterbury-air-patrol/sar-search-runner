@@ -32849,24 +32849,42 @@
       return `${bearing}`;
     }
     render() {
-      const distance = new Distance(this.state.search.complete ? this.state.search.sweepWidth : this.state.search.leg.distance, "m");
-      const time = new Time(distance.getDistance("m") / this.state.speed.getSpeed("m/s"), "seconds");
+      const distance = new Distance(
+        this.state.search.complete ? this.state.search.sweepWidth : this.state.search.leg.distance,
+        "m"
+      );
+      const time = new Time(
+        distance.getDistance("m") / this.state.speed.getSpeed("m/s"),
+        "seconds"
+      );
       const buttons = [];
       if (this.state.search.complete || this.state.searchLeg > 1) {
-        buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "reset", onClick: this.handleReset }, "Reset"));
+        buttons.push(
+          /* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "reset", onClick: this.handleReset }, "Reset")
+        );
       }
       if (!this.state.search.complete) {
         if (this.state.running) {
-          buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "pause", onClick: this.handlePause }, "Pause"));
+          buttons.push(
+            /* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "pause", onClick: this.handlePause }, "Pause")
+          );
         } else {
           if (this.state.searchLeg > 1) {
-            buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "back", onClick: this.handleBackLeg }, "Previous"));
-            buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "resume", onClick: this.handleRun }, "Resume"));
+            buttons.push(
+              /* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "back", onClick: this.handleBackLeg }, "Previous")
+            );
+            buttons.push(
+              /* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "resume", onClick: this.handleRun }, "Resume")
+            );
           } else {
-            buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "run", onClick: this.handleRun }, "Run"));
+            buttons.push(
+              /* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "run", onClick: this.handleRun }, "Run")
+            );
           }
           if (!this.state.search.complete) {
-            buttons.push(/* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "skip", onClick: this.handleSkipLeg }, "Skip"));
+            buttons.push(
+              /* @__PURE__ */ import_react22.default.createElement(Button_default, { key: "skip", onClick: this.handleSkipLeg }, "Skip")
+            );
           }
         }
       }
@@ -32874,7 +32892,15 @@
       let instructionText = "Complete";
       if (!this.state.search.complete) {
         if (this.state.running) {
-          timer = /* @__PURE__ */ import_react22.default.createElement("h1", null, /* @__PURE__ */ import_react22.default.createElement(SearchTimer, { key: "timer" + this.state.searchLeg, runTime: Math.round(time.getTime("seconds")), run: this.state.running, complete: this.onCompleteTimer }));
+          timer = /* @__PURE__ */ import_react22.default.createElement("h1", null, /* @__PURE__ */ import_react22.default.createElement(
+            SearchTimer,
+            {
+              key: "timer" + this.state.searchLeg,
+              runTime: Math.round(time.getTime("seconds")),
+              run: this.state.running,
+              complete: this.onCompleteTimer
+            }
+          ));
         }
         instructionText = `Head ${this.humanBearing(this.state.search.leg.bearing)}`;
         if (this.state.search.currentLeg + 1 <= this.state.search.searchLegs.length) {
@@ -32882,7 +32908,13 @@
         }
       }
       const instruction = /* @__PURE__ */ import_react22.default.createElement("h1", null, instructionText);
-      const totalDistance = /* @__PURE__ */ import_react22.default.createElement("h1", null, "Total Length: ", /* @__PURE__ */ import_react22.default.createElement(DistanceUI, { distance: new Distance(this.state.search.length, "m"), locked: true }));
+      const totalDistance = /* @__PURE__ */ import_react22.default.createElement("h1", null, "Total Length:", " ", /* @__PURE__ */ import_react22.default.createElement(
+        DistanceUI,
+        {
+          distance: new Distance(this.state.search.length, "m"),
+          locked: true
+        }
+      ));
       return /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, /* @__PURE__ */ import_react22.default.createElement(
         SpeedTimeDistanceUI,
         {
@@ -32896,7 +32928,13 @@
           updateTime: this.onChangeTime,
           updateSpeed: this.onChangeSpeed
         }
-      ), /* @__PURE__ */ import_react22.default.createElement(ButtonGroup_default, null, buttons), timer, instruction, /* @__PURE__ */ import_react22.default.createElement(SearchDisplay, { key: "display" + this.state.searchLeg, search: this.state.search }), totalDistance);
+      ), /* @__PURE__ */ import_react22.default.createElement(ButtonGroup_default, null, buttons), timer, instruction, /* @__PURE__ */ import_react22.default.createElement(
+        SearchDisplay,
+        {
+          key: "display" + this.state.searchLeg,
+          search: this.state.search
+        }
+      ), totalDistance);
     }
   };
   SearchRunner.propTypes = {
@@ -32917,7 +32955,13 @@
       });
     }
     render() {
-      return /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, /* @__PURE__ */ import_react22.default.createElement(SearchConfiguration, { updateSearch: this.onChangeSearch }), /* @__PURE__ */ import_react22.default.createElement(SearchRunner, { key: `${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.multiplier}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`, search: this.state.search }));
+      return /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, /* @__PURE__ */ import_react22.default.createElement(SearchConfiguration, { updateSearch: this.onChangeSearch }), /* @__PURE__ */ import_react22.default.createElement(
+        SearchRunner,
+        {
+          key: `${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.multiplier}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`,
+          search: this.state.search
+        }
+      ));
     }
   };
 
