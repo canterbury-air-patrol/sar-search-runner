@@ -30723,17 +30723,14 @@
   var React2 = __toESM(require_react());
   var import_jsx_runtime2 = __toESM(require_jsx_runtime());
   var _excluded = ["as", "disabled"];
-  function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for (i = 0; i < sourceKeys.length; i++) {
-      key = sourceKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      target[key] = source[key];
+  function _objectWithoutPropertiesLoose(r, e) {
+    if (null == r) return {};
+    var t = {};
+    for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+      if (e.indexOf(n) >= 0) continue;
+      t[n] = r[n];
     }
-    return target;
+    return t;
   }
   function isTrivialHref(href) {
     return !href || href.trim() === "#";
