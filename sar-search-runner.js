@@ -4,20 +4,16 @@ import PropTypes from "prop-types";
 import {
   CreepingLineAheadSearch,
   SectorSearch,
-} from "@canterbury-air-patrol/sar-search-patterns";
-import {
   SearchDisplay,
   SearchConfiguration,
-} from "@canterbury-air-patrol/sar-search-patterns/react";
+} from "@canterbury-air-patrol/sar-search-patterns";
 import {
   Distance,
   Speed,
   Time,
-} from "@canterbury-air-patrol/speed-time-distance";
-import {
   DistanceUI,
   SpeedTimeDistanceUI,
-} from "@canterbury-air-patrol/speed-time-distance/react";
+} from "@canterbury-air-patrol/speed-time-distance";
 import { Button, ButtonGroup } from "react-bootstrap";
 
 const SearchTimer = ({ runTime, run, complete }) => {
