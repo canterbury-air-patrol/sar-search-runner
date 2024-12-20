@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 
 import {
   CreepingLineAheadSearch,
   SectorSearch,
   SearchDisplay,
   SearchConfiguration,
+  SearchPattern,
 } from "@canterbury-air-patrol/sar-search-patterns";
 import {
   Distance,
@@ -16,7 +16,15 @@ import {
 } from "@canterbury-air-patrol/speed-time-distance";
 import { Button, ButtonGroup } from "react-bootstrap";
 
-const SearchTimer = ({ runTime, run, complete }) => {
+const SearchTimer = ({
+  runTime,
+  run,
+  complete,
+}: {
+  runTime: number;
+  run: boolean;
+  complete?: () => void;
+}) => {
   const [remainingTime, setRemainingTime] = useState(runTime);
   const [running, setRunning] = useState(run);
 
@@ -42,17 +50,27 @@ const SearchTimer = ({ runTime, run, complete }) => {
 
   return <>Turn in: {remainingTime} seconds</>;
 };
-SearchTimer.propTypes = {
-  runTime: PropTypes.number.isRequired,
-  run: PropTypes.bool,
-  complete: PropTypes.func,
-};
 
-class SearchRunner extends React.Component {
-  constructor(props) {
+interface SearchRunnerProps {
+  search?: SearchPattern;
+  complete?: () => void;
+}
+
+interface SearchRunnerState {
+  search: SearchPattern;
+  running: boolean;
+  searchLeg: number;
+  speed: Speed;
+}
+
+class SearchRunner extends React.Component<
+  SearchRunnerProps,
+  SearchRunnerState
+> {
+  constructor(props: SearchRunnerProps) {
     super(props);
     this.onChangeSpeed = this.onChangeSpeed.bind(this);
-    this.onChangeTime = this.onChangeTime.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.onCompleteTimer = this.onCompleteTimer.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.handlePause = this.handlePause.bind(this);
@@ -61,7 +79,6 @@ class SearchRunner extends React.Component {
     this.handleSkipLeg = this.handleSkipLeg.bind(this);
 
     this.state = {
-      legTime: 10,
       search:
         this.props.search === undefined
           ? new CreepingLineAheadSearch(200, 1000, 5, 0)
@@ -72,29 +89,26 @@ class SearchRunner extends React.Component {
     };
   }
 
-  onChangeTime(newTime) {
-    this.setState({
-      time: newTime,
-    });
-  }
-
-  onChangeSpeed(newSpeed) {
+  onChangeSpeed(newSpeed: Speed) {
     this.setState({
       speed: newSpeed,
     });
   }
 
+  updateState() {
+    if (this.state.search.complete && this.props.complete) {
+      this.props.complete();
+    }
+  }
+
   onCompleteTimer() {
     this.setState(function (oldState) {
       oldState.search.nextLeg();
-      if (oldState.search.complete && this.props.complete) {
-        this.props.complete();
-      }
       return {
         search: oldState.search,
         searchLeg: oldState.search.currentLeg,
       };
-    });
+    }, this.updateState);
   }
 
   handleReset() {
@@ -140,7 +154,7 @@ class SearchRunner extends React.Component {
     });
   }
 
-  humanBearing(bearing) {
+  humanBearing(bearing: number) {
     if (bearing < 10) {
       return `00${bearing}`;
     }
@@ -249,7 +263,6 @@ class SearchRunner extends React.Component {
           speed={this.state.speed}
           distance={distance}
           time={time}
-          updateTime={this.onChangeTime}
           updateSpeed={this.onChangeSpeed}
         />
         <ButtonGroup>{buttons}</ButtonGroup>
@@ -264,13 +277,16 @@ class SearchRunner extends React.Component {
     );
   }
 }
-SearchRunner.propTypes = {
-  search: PropTypes.object,
-  complete: PropTypes.func,
-};
 
-class SearchRunnerConfiguration extends React.Component {
-  constructor(props) {
+interface SearchRunnerConfigurationState {
+  search: SearchPattern;
+}
+
+class SearchRunnerConfiguration extends React.Component<
+  object,
+  SearchRunnerConfigurationState
+> {
+  constructor(props: object) {
     super(props);
     this.onChangeSearch = this.onChangeSearch.bind(this);
     this.state = {
@@ -278,10 +294,12 @@ class SearchRunnerConfiguration extends React.Component {
     };
   }
 
-  onChangeSearch(search) {
-    this.setState({
-      search,
-    });
+  onChangeSearch(search: SearchPattern | undefined) {
+    if (search !== undefined) {
+      this.setState({
+        search,
+      });
+    }
   }
 
   render() {
@@ -289,7 +307,7 @@ class SearchRunnerConfiguration extends React.Component {
       <>
         <SearchConfiguration updateSearch={this.onChangeSearch} />
         <SearchRunner
-          key={`${this.state.search.searchType}-${this.state.search.sweepWidth}-${this.state.search.multiplier}-${this.state.search.iterations}-${this.state.search.legs}-${this.state.search.legLength}-${this.state.search.startingDirection}-${this.state.search.progressDirection}`}
+          key={`${this.state.search.uniqueKey()}`}
           search={this.state.search}
         />
       </>
