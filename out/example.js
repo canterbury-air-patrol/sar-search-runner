@@ -26596,6 +26596,9 @@
     nextLeg() {
       this.currentLeg++;
     }
+    uniqueKey() {
+      return `${this.searchType}-${this.sweepWidth}-${this.searchLegs}-${this.currentLeg}`;
+    }
   };
   function move(from, direction, distance) {
     const to = { x: 0, y: 0 };
@@ -26647,6 +26650,9 @@
         lastPoint = to;
       }
     }
+    uniqueKey() {
+      return `${this.searchType}-${this.sweepWidth}-${this.searchLegs}-${this.currentLeg}-${this.startingDirection}-${this.multiplier}-${this.iterations}`;
+    }
   };
   var ExpandingBoxSearch = class extends SearchPattern {
     constructor(sweepWidth, iterations, startingDirection) {
@@ -26667,6 +26673,9 @@
         direction = (direction + 90) % 360;
         from = to;
       }
+    }
+    uniqueKey() {
+      return `${this.searchType}-${this.sweepWidth}-${this.searchLegs}-${this.currentLeg}-${this.startingDirection}-${this.iterations}`;
     }
   };
   var CreepingLineAheadSearch = class extends SearchPattern {
@@ -26709,6 +26718,9 @@
         }
         this.searchLegs.push(new SearchLeg(from, to, distance, direction));
       }
+    }
+    uniqueKey() {
+      return `${this.searchType}-${this.sweepWidth}-${this.searchLegs}-${this.currentLeg}-${this.legLength}-${this.legs}-${this.progressDirection}`;
     }
   };
   var SearchDisplay = class extends import_react10.default.Component {
