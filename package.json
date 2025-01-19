@@ -1,6 +1,6 @@
 {
   "name": "@canterbury-air-patrol/sar-search-runner",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "SAR Search runner tool",
   "main": "dist/sar-search-runner.js",
   "modules": "dist/sar-search-runner.mjs",
@@ -46,10 +46,12 @@
     "typescript-eslint": "^8.18.1"
   },
   "dependencies": {
-    "@canterbury-air-patrol/sar-search-patterns": "0.1.2",
-    "@canterbury-air-patrol/speed-time-distance": "0.1.1",
+    "@canterbury-air-patrol/sar-search-patterns": "0.1.3",
+    "@canterbury-air-patrol/speed-time-distance": "0.1.2",
     "bootstrap": "~5.3.1",
-    "react": "^19.0.0",
     "react-bootstrap": "~2.10.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
   }
 }
