@@ -22476,7 +22476,7 @@
       }
     }
   };
-  var VERSION = "5.3.6";
+  var VERSION = "5.3.7";
   var BaseComponent = class extends Config {
     constructor(element, config) {
       super();
@@ -24855,6 +24855,7 @@
         if (trigger === "click") {
           EventHandler.on(this._element, this.constructor.eventName(EVENT_CLICK$1), this._config.selector, (event) => {
             const context = this._initializeOnDelegatedTarget(event);
+            context._activeTrigger[TRIGGER_CLICK] = !(context._isShown() && context._activeTrigger[TRIGGER_CLICK]);
             context.toggle();
           });
         } else if (trigger !== TRIGGER_MANUAL) {
@@ -27385,7 +27386,7 @@ object-assign/index.js:
 
 bootstrap/dist/js/bootstrap.esm.js:
   (*!
-    * Bootstrap v5.3.6 (https://getbootstrap.com/)
+    * Bootstrap v5.3.7 (https://getbootstrap.com/)
     * Copyright 2011-2025 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
     *)
