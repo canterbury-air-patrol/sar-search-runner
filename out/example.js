@@ -541,13 +541,16 @@
           return null;
         };
         deprecatedAPIs = {
-          "react-stack-bottom-frame": function(callStackForError) {
+          react_stack_bottom_frame: function(callStackForError) {
             return callStackForError();
           }
         };
         var specialPropKeyWarningShown, didWarnAboutOldJSXRuntime;
         var didWarnAboutElementRef = {};
-        var unknownOwnerDebugStack = deprecatedAPIs["react-stack-bottom-frame"].bind(deprecatedAPIs, UnknownOwner)();
+        var unknownOwnerDebugStack = deprecatedAPIs.react_stack_bottom_frame.bind(
+          deprecatedAPIs,
+          UnknownOwner
+        )();
         var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
         var didWarnAboutMaps = false, userProvidedKeyEscapeRegex = /\/+/g, reportGlobalError = "function" === typeof reportError ? reportError : function(error) {
           if ("object" === typeof window && "function" === typeof window.ErrorEvent) {
@@ -964,7 +967,7 @@
         exports.useTransition = function() {
           return resolveDispatcher().useTransition();
         };
-        exports.version = "19.1.0";
+        exports.version = "19.1.1";
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
       })();
     }
@@ -1491,7 +1494,7 @@
         exports.useFormStatus = function() {
           return resolveDispatcher().useHostTransitionStatus();
         };
-        exports.version = "19.1.0";
+        exports.version = "19.1.1";
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
       })();
     }
@@ -2592,7 +2595,7 @@
           error.startsWith("Error: react-stack-top-frame\n") && (error = error.slice(29));
           prevPrepareStackTrace = error.indexOf("\n");
           -1 !== prevPrepareStackTrace && (error = error.slice(prevPrepareStackTrace + 1));
-          prevPrepareStackTrace = error.indexOf("react-stack-bottom-frame");
+          prevPrepareStackTrace = error.indexOf("react_stack_bottom_frame");
           -1 !== prevPrepareStackTrace && (prevPrepareStackTrace = error.lastIndexOf(
             "\n",
             prevPrepareStackTrace
@@ -18648,7 +18651,7 @@
           }
         };
         var callComponent = {
-          "react-stack-bottom-frame": function(Component, props, secondArg) {
+          react_stack_bottom_frame: function(Component, props, secondArg) {
             var wasRendering = isRendering;
             isRendering = true;
             try {
@@ -18657,8 +18660,8 @@
               isRendering = wasRendering;
             }
           }
-        }, callComponentInDEV = callComponent["react-stack-bottom-frame"].bind(callComponent), callRender = {
-          "react-stack-bottom-frame": function(instance) {
+        }, callComponentInDEV = callComponent.react_stack_bottom_frame.bind(callComponent), callRender = {
+          react_stack_bottom_frame: function(instance) {
             var wasRendering = isRendering;
             isRendering = true;
             try {
@@ -18667,39 +18670,47 @@
               isRendering = wasRendering;
             }
           }
-        }, callRenderInDEV = callRender["react-stack-bottom-frame"].bind(callRender), callComponentDidMount = {
-          "react-stack-bottom-frame": function(finishedWork, instance) {
+        }, callRenderInDEV = callRender.react_stack_bottom_frame.bind(callRender), callComponentDidMount = {
+          react_stack_bottom_frame: function(finishedWork, instance) {
             try {
               instance.componentDidMount();
             } catch (error) {
               captureCommitPhaseError(finishedWork, finishedWork.return, error);
             }
           }
-        }, callComponentDidMountInDEV = callComponentDidMount["react-stack-bottom-frame"].bind(callComponentDidMount), callComponentDidUpdate = {
-          "react-stack-bottom-frame": function(finishedWork, instance, prevProps, prevState, snapshot) {
+        }, callComponentDidMountInDEV = callComponentDidMount.react_stack_bottom_frame.bind(
+          callComponentDidMount
+        ), callComponentDidUpdate = {
+          react_stack_bottom_frame: function(finishedWork, instance, prevProps, prevState, snapshot) {
             try {
               instance.componentDidUpdate(prevProps, prevState, snapshot);
             } catch (error) {
               captureCommitPhaseError(finishedWork, finishedWork.return, error);
             }
           }
-        }, callComponentDidUpdateInDEV = callComponentDidUpdate["react-stack-bottom-frame"].bind(callComponentDidUpdate), callComponentDidCatch = {
-          "react-stack-bottom-frame": function(instance, errorInfo) {
+        }, callComponentDidUpdateInDEV = callComponentDidUpdate.react_stack_bottom_frame.bind(
+          callComponentDidUpdate
+        ), callComponentDidCatch = {
+          react_stack_bottom_frame: function(instance, errorInfo) {
             var stack = errorInfo.stack;
             instance.componentDidCatch(errorInfo.value, {
               componentStack: null !== stack ? stack : ""
             });
           }
-        }, callComponentDidCatchInDEV = callComponentDidCatch["react-stack-bottom-frame"].bind(callComponentDidCatch), callComponentWillUnmount = {
-          "react-stack-bottom-frame": function(current2, nearestMountedAncestor, instance) {
+        }, callComponentDidCatchInDEV = callComponentDidCatch.react_stack_bottom_frame.bind(
+          callComponentDidCatch
+        ), callComponentWillUnmount = {
+          react_stack_bottom_frame: function(current2, nearestMountedAncestor, instance) {
             try {
               instance.componentWillUnmount();
             } catch (error) {
               captureCommitPhaseError(current2, nearestMountedAncestor, error);
             }
           }
-        }, callComponentWillUnmountInDEV = callComponentWillUnmount["react-stack-bottom-frame"].bind(callComponentWillUnmount), callCreate = {
-          "react-stack-bottom-frame": function(effect4) {
+        }, callComponentWillUnmountInDEV = callComponentWillUnmount.react_stack_bottom_frame.bind(
+          callComponentWillUnmount
+        ), callCreate = {
+          react_stack_bottom_frame: function(effect4) {
             null != effect4.resourceKind && console.error(
               "Expected only SimpleEffects when enableUseEffectCRUDOverload is disabled, got %s",
               effect4.resourceKind
@@ -18709,20 +18720,20 @@
             create = create();
             return effect4.destroy = create;
           }
-        }, callCreateInDEV = callCreate["react-stack-bottom-frame"].bind(callCreate), callDestroy = {
-          "react-stack-bottom-frame": function(current2, nearestMountedAncestor, destroy) {
+        }, callCreateInDEV = callCreate.react_stack_bottom_frame.bind(callCreate), callDestroy = {
+          react_stack_bottom_frame: function(current2, nearestMountedAncestor, destroy) {
             try {
               destroy();
             } catch (error) {
               captureCommitPhaseError(current2, nearestMountedAncestor, error);
             }
           }
-        }, callDestroyInDEV = callDestroy["react-stack-bottom-frame"].bind(callDestroy), callLazyInit = {
-          "react-stack-bottom-frame": function(lazy) {
+        }, callDestroyInDEV = callDestroy.react_stack_bottom_frame.bind(callDestroy), callLazyInit = {
+          react_stack_bottom_frame: function(lazy) {
             var init = lazy._init;
             return init(lazy._payload);
           }
-        }, callLazyInitInDEV = callLazyInit["react-stack-bottom-frame"].bind(callLazyInit), thenableState = null, thenableIndexCounter = 0, currentDebugInfo = null, didWarnAboutMaps;
+        }, callLazyInitInDEV = callLazyInit.react_stack_bottom_frame.bind(callLazyInit), thenableState = null, thenableIndexCounter = 0, currentDebugInfo = null, didWarnAboutMaps;
         var didWarnAboutGenerators = didWarnAboutMaps = false;
         var ownerHasKeyUseWarning = {};
         var ownerHasFunctionTypeWarning = {};
@@ -19166,9 +19177,9 @@
         };
         (function() {
           var isomorphicReactPackageVersion = React27.version;
-          if ("19.1.0" !== isomorphicReactPackageVersion)
+          if ("19.1.1" !== isomorphicReactPackageVersion)
             throw Error(
-              'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.1.0\nLearn more: https://react.dev/warnings/version-mismatch")
+              'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.1.1\nLearn more: https://react.dev/warnings/version-mismatch")
             );
         })();
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
@@ -19192,10 +19203,10 @@
         if (!function() {
           var internals = {
             bundleType: 1,
-            version: "19.1.0",
+            version: "19.1.1",
             rendererPackageName: "react-dom",
             currentDispatcherRef: ReactSharedInternals,
-            reconcilerVersion: "19.1.0"
+            reconcilerVersion: "19.1.1"
           };
           internals.overrideHookState = overrideHookState;
           internals.overrideHookStateDeletePath = overrideHookStateDeletePath;
@@ -19286,7 +19297,7 @@
           listenToAllSupportedEvents(container);
           return new ReactDOMHydrationRoot(initialChildren);
         };
-        exports.version = "19.1.0";
+        exports.version = "19.1.1";
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
       })();
     }
@@ -19584,13 +19595,13 @@
           return null;
         };
         React27 = {
-          "react-stack-bottom-frame": function(callStackForError) {
+          react_stack_bottom_frame: function(callStackForError) {
             return callStackForError();
           }
         };
         var specialPropKeyWarningShown;
         var didWarnAboutElementRef = {};
-        var unknownOwnerDebugStack = React27["react-stack-bottom-frame"].bind(
+        var unknownOwnerDebugStack = React27.react_stack_bottom_frame.bind(
           React27,
           UnknownOwner
         )();
