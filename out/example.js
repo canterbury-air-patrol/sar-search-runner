@@ -31341,23 +31341,20 @@
   }) => {
     const [remainingTime, setRemainingTime] = (0, import_react12.useState)(runTime);
     const [running, setRunning] = (0, import_react12.useState)(run);
-    const updateRemainingTime = () => {
-      if (running) {
-        if (remainingTime <= 1) {
-          setRunning(false);
-          if (complete !== void 0) {
-            complete();
-          }
-        }
-        setRemainingTime(remainingTime - 1);
-      }
-    };
     (0, import_react12.useEffect)(() => {
       const interval = setInterval(() => {
-        updateRemainingTime();
+        if (running) {
+          if (remainingTime <= 1) {
+            setRunning(false);
+            if (complete !== void 0) {
+              complete();
+            }
+          }
+          setRemainingTime(remainingTime - 1);
+        }
       }, 1e3);
       return () => clearInterval(interval);
-    }, [remainingTime]);
+    }, [remainingTime, running, complete]);
     return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, "Turn in: ", remainingTime, " seconds");
   };
   var SearchRunner = class extends import_react12.default.Component {
