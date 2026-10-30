@@ -28,25 +28,21 @@ const SearchTimer = ({
   const [remainingTime, setRemainingTime] = useState(runTime);
   const [running, setRunning] = useState(run);
 
-  const updateRemainingTime = () => {
-    if (running) {
-      if (remainingTime <= 1) {
-        setRunning(false);
-        if (complete !== undefined) {
-          complete();
-        }
-      }
-      setRemainingTime(remainingTime - 1);
-    }
-  };
-
   useEffect(() => {
     const interval = setInterval(() => {
-      updateRemainingTime();
+      if (running) {
+        if (remainingTime <= 1) {
+          setRunning(false);
+          if (complete !== undefined) {
+            complete();
+          }
+        }
+        setRemainingTime(remainingTime - 1);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [remainingTime]);
+  }, [remainingTime, running, complete]);
 
   return <>Turn in: {remainingTime} seconds</>;
 };
